@@ -3,167 +3,212 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>2026 FIFA World Cup 手機版</title>
+<title>2026 FIFA World Cup</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{
   font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  background:#F8FAFF;color:#0f172a;
+  background:#F0F4FF;color:#0f172a;
   min-height:100vh;height:auto;
   overflow-x:hidden;overflow-y:auto;
   -webkit-overflow-scrolling:touch;
+  font-size:16px;
 }
 
-/* ── Top header ── */
-.m-hdr{
-  background:linear-gradient(135deg,#1e3a8a,#1d4ed8);
-  color:#fff;padding:10px 14px 8px;position:sticky;top:0;z-index:100;
+/* ── Header ── */
+.hdr{
+  background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 100%);
+  padding:14px 16px 12px;
+  position:sticky;top:0;z-index:200;
 }
-.m-hdr-title{font-size:14px;font-weight:800;margin-bottom:2px}
-.m-hdr-sub{font-size:10px;color:#93c5fd;line-height:1.4}
+.hdr-title{font-size:17px;font-weight:900;color:#fff;letter-spacing:-.3px}
+.hdr-sub{font-size:11px;color:#93c5fd;margin-top:3px;line-height:1.4}
 
-/* ── Stats bar ── */
-.m-stats{display:flex;background:#fff;border-bottom:1px solid #e2e8f0}
-.m-stat{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;
-  padding:7px 4px;border-top:3px solid}
-.m-stat:nth-child(1){border-color:#3B82F6;background:#EFF6FF}
-.m-stat:nth-child(2){border-color:#10B981;background:#ECFDF5}
-.m-stat:nth-child(3){border-color:#F59E0B;background:#FFFBEB}
-.m-stat:nth-child(4){border-color:#EC4899;background:#FDF2F8}
-.m-stat-val{font-size:15px;font-weight:800;color:#0f172a}
-.m-stat-lbl{font-size:9px;color:#334155;font-weight:600}
+/* ── Stats ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;
+  border-bottom:2px solid #e2e8f0}
+.stat{text-align:center;padding:10px 4px;border-top:3px solid}
+.stat:nth-child(1){border-color:#3B82F6;background:#EFF6FF}
+.stat:nth-child(2){border-color:#10B981;background:#ECFDF5}
+.stat:nth-child(3){border-color:#F59E0B;background:#FFFBEB}
+.stat:nth-child(4){border-color:#EC4899;background:#FDF2F8}
+.stat-val{font-size:20px;font-weight:900;color:#0f172a;line-height:1}
+.stat-lbl{font-size:10px;color:#475569;font-weight:600;margin-top:2px}
 
-/* ── Tab bar ── */
-.m-tabs{display:flex;background:#fff;border-bottom:2px solid #e2e8f0;position:sticky;top:56px;z-index:99}
-.m-tab{flex:1;padding:10px 0;font-size:13px;font-weight:700;border:none;
-  background:none;cursor:pointer;color:#64748b;font-family:inherit;
-  border-bottom:3px solid transparent;margin-bottom:-2px}
-.m-tab.active{color:#1e40af;border-bottom-color:#1e40af;background:#f0f6ff}
+/* ── Main Tab ── */
+.main-tabs{display:flex;background:#fff;border-bottom:3px solid #e2e8f0;
+  position:sticky;top:69px;z-index:199}
+.main-tab{flex:1;padding:13px 0;font-size:15px;font-weight:700;
+  border:none;background:none;cursor:pointer;color:#64748b;font-family:inherit;
+  border-bottom:4px solid transparent;margin-bottom:-3px}
+.main-tab.active{color:#1e40af;border-bottom-color:#1e40af;background:#f0f6ff}
 
-/* ── Group stage ── */
-.m-group-btns{
-  display:flex;flex-wrap:wrap;gap:5px;padding:8px 12px;
+/* ── Group buttons ── */
+.group-bar{
+  display:flex;overflow-x:auto;gap:8px;padding:10px 14px;
   background:#fff;border-bottom:1px solid #e2e8f0;
-  position:sticky;top:100px;z-index:98;
+  position:sticky;top:120px;z-index:198;
+  scrollbar-width:none;-ms-overflow-style:none;
 }
-.m-gbtn{
-  padding:4px 10px;border-radius:99px;font-size:11px;font-weight:700;
-  border:2px solid;cursor:pointer;background:#fff;font-family:inherit;
+.group-bar::-webkit-scrollbar{display:none}
+.gbtn{
+  padding:7px 14px;border-radius:99px;font-size:13px;font-weight:700;
+  border:2.5px solid;cursor:pointer;background:#fff;font-family:inherit;
+  white-space:nowrap;flex-shrink:0;
 }
-.m-gbtn.active{color:#fff}
+.gbtn.active{color:#fff}
 
-/* ── Match cards ── */
-.m-date-hdr{
-  font-size:11px;font-weight:800;color:#64748b;text-transform:uppercase;
-  letter-spacing:.06em;padding:10px 12px 5px;
-  background:#F8FAFF;border-bottom:1px solid #e2e8f0;
-  position:sticky;top:148px;z-index:97;
+/* ── Date header ── */
+.date-hdr{
+  padding:12px 16px 8px;font-size:12px;font-weight:800;
+  color:#64748b;text-transform:uppercase;letter-spacing:.08em;
+  background:#F0F4FF;border-bottom:1px solid #dde4f0;
+  position:sticky;top:169px;z-index:197;
 }
-.m-card{
-  background:#fff;border-bottom:1px solid #f1f5f9;
-  padding:10px 12px;
-}
-.m-card-top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
-.m-group-badge{
-  width:32px;height:32px;border-radius:8px;display:flex;align-items:center;
-  justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;
-}
-.m-teams{flex:1;min-width:0}
-.m-team-row{display:flex;align-items:center;gap:6px;padding:2px 0}
-.m-flag{width:22px;height:15px;object-fit:cover;border-radius:2px;
-  border:1px solid rgba(0,0,0,.1);flex-shrink:0}
-.m-team-zh{font-size:13px;font-weight:700;color:#0f172a}
-.m-team-en{font-size:9.5px;color:#94a3b8}
-.m-vs{font-size:9px;color:#cbd5e1;text-align:center;padding:1px 0}
-.m-time-col{text-align:right;flex-shrink:0}
-.m-time{font-size:16px;font-weight:800;color:#1e40af}
-.m-date{font-size:10px;color:#64748b}
-.m-venue{font-size:9px;color:#94a3b8;margin-top:4px;display:flex;align-items:center;gap:3px}
 
-/* Guide accordion */
-.m-guide-btn{
-  width:100%;text-align:left;padding:6px 12px;background:#f8faff;
-  border:none;border-top:1px solid #f1f5f9;cursor:pointer;
-  font-size:11px;color:#1e40af;font-weight:600;font-family:inherit;
+/* ── Match card ── */
+.match-card{
+  background:#fff;margin:8px 12px;border-radius:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden;
+}
+
+/* Card top: group badge + time */
+.card-top{
   display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px 8px;border-bottom:1px solid #f1f5f9;
 }
-.m-guide-body{display:none;padding:8px 12px 10px;background:#f0f6ff;
-  border-top:1px solid #dbeafe;font-size:11px;line-height:1.7;color:#334155}
-.m-guide-body.open{display:block}
-.m-guide-title{font-size:12px;font-weight:800;color:#1e3a8a;margin-bottom:4px}
-.m-guide-key{margin-top:6px;font-size:10.5px;color:#1e293b;
-  padding:5px 8px;background:#fff;border-radius:6px;border-left:3px solid #f59e0b;line-height:1.6}
-.m-guide-key-lbl{font-size:9px;font-weight:800;text-transform:uppercase;
-  color:#b45309;letter-spacing:.05em;margin-bottom:2px}
+.group-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 10px;border-radius:99px;font-size:12px;font-weight:800;
+}
+.match-time{font-size:22px;font-weight:900;color:#1e40af;line-height:1}
+.match-date{font-size:11px;color:#94a3b8;text-align:right;margin-top:1px}
 
-/* ── KO bracket ── */
-.m-ko-wrap{overflow-x:auto;overflow-y:visible;-webkit-overflow-scrolling:touch;
-  padding:12px;background:#F8FAFF}
-.m-ko-note{font-size:10.5px;color:#64748b;padding:8px 12px;
-  background:#f1f5f9;border-radius:7px;margin-bottom:10px;line-height:1.6}
+/* Teams section */
+.teams{padding:12px 14px}
+.team-row{display:flex;align-items:center;gap:10px;padding:5px 0}
+.team-row+.team-row{border-top:1px solid #f8faff;margin-top:4px;padding-top:9px}
+.flag{width:32px;height:22px;object-fit:cover;border-radius:4px;
+  border:1px solid rgba(0,0,0,.1);flex-shrink:0}
+.team-info{flex:1}
+.team-zh{font-size:18px;font-weight:800;color:#0f172a;line-height:1.2}
+.team-en{font-size:11px;color:#94a3b8;margin-top:1px}
+.vs-divider{text-align:center;font-size:11px;color:#cbd5e1;
+  font-weight:700;letter-spacing:.1em;padding:2px 0}
 
-/* KO cards */
-.bkt-col{display:flex;flex-direction:column;flex-shrink:0;width:130px;position:relative}
-.bkt-col-label{font-size:9px;font-weight:800;color:#fff;text-transform:uppercase;
-  letter-spacing:.07em;margin-bottom:8px;padding:3px 6px;border-radius:4px;
-  background:#1e40af;text-align:center;white-space:nowrap}
-.bkt-col-label.next{background:#64748b}
-.bkt-col-label.qf{background:#7c3aed}
-.bkt-col-label.sf{background:#b45309}
-.bkt-col-label.final{background:#d97706}
-.bkt-card{background:#fff;border-radius:8px;border:1.5px solid #e2e8f0;
-  width:130px;cursor:pointer;flex-shrink:0;transition:border-color .15s}
-.bkt-card.final-card{border-color:#F59E0B;border-width:2px;background:#FFFBEB}
-.bkt-card.third-card{border-color:#10B981;border-width:2px;background:#F0FDF4}
-.bkt-card-hdr{display:flex;justify-content:space-between;align-items:center;
-  padding:3px 7px 2px;background:#EFF6FF;border-radius:6px 6px 0 0;
-  border-bottom:1px solid #BFDBFE}
-.bkt-card.final-card .bkt-card-hdr{background:#FEF3C7;border-bottom-color:#FDE68A}
-.bkt-card.third-card .bkt-card-hdr{background:#D1FAE5;border-bottom-color:#6EE7B7}
-.bkt-mid{font-size:8px;color:#1e40af;font-weight:800}
-.bkt-time{font-size:8.5px;font-weight:800;color:#1e3a8a;white-space:nowrap}
-.bkt-team{display:flex;align-items:center;gap:5px;padding:3px 7px}
-.bkt-team+.bkt-team{border-top:1px solid #f8faff}
-.bkt-flag{width:18px;height:12px;object-fit:cover;border-radius:2px;
-  border:1px solid rgba(0,0,0,.08);flex-shrink:0}
-.bkt-name{font-size:11px;font-weight:700;color:#0f172a;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:88px}
-.bkt-tbd{font-size:10px;color:#94a3b8;font-style:italic;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:97px}
-.bkt-venue{padding:2px 7px 4px;font-size:8px;color:#94a3b8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bkt-conn{flex-shrink:0;position:relative;align-self:stretch;width:28px}
+/* Venue */
+.venue-row{
+  display:flex;align-items:center;gap:5px;
+  padding:8px 14px;background:#f8faff;
+  font-size:12px;color:#64748b;font-weight:500;
+  border-top:1px solid #f1f5f9;
+}
+
+/* Guide */
+.guide-btn{
+  width:100%;text-align:left;padding:11px 14px;
+  background:#EFF6FF;border:none;border-top:1px solid #BFDBFE;
+  cursor:pointer;font-size:13px;color:#1e40af;font-weight:700;
+  font-family:inherit;display:flex;align-items:center;justify-content:space-between;
+}
+.guide-arrow{font-size:12px;transition:transform .2s}
+.guide-arrow.open{transform:rotate(180deg)}
+.guide-body{
+  display:none;padding:14px;background:#f0f6ff;
+  border-top:1px solid #dbeafe;
+}
+.guide-body.open{display:block}
+.guide-title{font-size:14px;font-weight:800;color:#1e3a8a;
+  margin-bottom:8px;line-height:1.4}
+.guide-text{font-size:13px;color:#334155;line-height:1.8}
+.guide-key{
+  margin-top:10px;padding:10px 12px;background:#fff;
+  border-radius:10px;border-left:4px solid #f59e0b;
+}
+.guide-key-lbl{font-size:10px;font-weight:800;text-transform:uppercase;
+  color:#b45309;letter-spacing:.06em;margin-bottom:4px}
+.guide-key-text{font-size:13px;color:#1e293b;line-height:1.7}
+
+/* ── KO: round tabs + cards ── */
+.ko-round-tabs{
+  display:flex;overflow-x:auto;gap:0;padding:0;
+  background:#fff;border-bottom:2px solid #e2e8f0;
+  position:sticky;top:120px;z-index:198;
+  scrollbar-width:none;
+}
+.ko-round-tabs::-webkit-scrollbar{display:none}
+.ko-rtab{
+  padding:12px 16px;font-size:13px;font-weight:700;border:none;
+  background:none;cursor:pointer;color:#64748b;font-family:inherit;
+  white-space:nowrap;border-bottom:3px solid transparent;flex-shrink:0;
+}
+.ko-rtab.active{color:#1e40af;border-bottom-color:#1e40af;background:#f0f6ff}
+
+.ko-list{padding:10px 12px;display:flex;flex-direction:column;gap:10px}
+
+/* KO match card */
+.ko-card{
+  background:#fff;border-radius:16px;overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
+}
+.ko-card.final-card{box-shadow:0 4px 16px rgba(245,158,11,.25);
+  border:2px solid #F59E0B;}
+.ko-card.third-card{border:2px solid #10B981;}
+.ko-card-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;background:#f8faff;border-bottom:1px solid #f1f5f9;
+}
+.ko-card.final-card .ko-card-hdr{background:#FFFBEB;}
+.ko-card.third-card .ko-card-hdr{background:#F0FDF4;}
+.ko-match-id{font-size:11px;font-weight:800;color:#94a3b8}
+.ko-match-time{font-size:20px;font-weight:900;color:#1e40af}
+.ko-match-date{font-size:11px;color:#94a3b8}
+.ko-teams{padding:12px 14px}
+.ko-team-row{display:flex;align-items:center;gap:10px;padding:5px 0}
+.ko-team-row+.ko-team-row{border-top:1px solid #f8faff;margin-top:4px;padding-top:9px}
+.ko-flag{width:30px;height:20px;object-fit:cover;border-radius:3px;
+  border:1px solid rgba(0,0,0,.1);flex-shrink:0}
+.ko-team-name{font-size:17px;font-weight:800;color:#0f172a}
+.ko-tbd{font-size:15px;color:#94a3b8;font-style:italic}
+.ko-venue{padding:8px 14px;background:#f8faff;border-top:1px solid #f1f5f9;
+  font-size:12px;color:#64748b;display:flex;align-items:center;gap:4px}
+.ko-note{margin:10px 12px;padding:10px 14px;background:#fff;
+  border-radius:12px;font-size:12px;color:#64748b;line-height:1.7;
+  border-left:4px solid #94a3b8}
+
+/* Empty */
+.empty{text-align:center;padding:50px 20px;color:#94a3b8;font-size:14px}
 </style>
 </head>
 <body>
 
-<div class="m-hdr">
-  <div class="m-hdr-title">⚽ 2026 FIFA World Cup 賽事儀表板</div>
-  <div class="m-hdr-sub">台灣時間（UTC+8）· 小組賽 6/11–6/28 · 淘汰賽 6/29–7/19</div>
+<div class="hdr">
+  <div class="hdr-title">⚽ 2026 FIFA World Cup</div>
+  <div class="hdr-sub">台灣時間（UTC+8）· 小組賽 6/11–6/28 · 淘汰賽 6/29–7/19</div>
 </div>
 
-<div class="m-stats">
-  <div class="m-stat"><div class="m-stat-val">72</div><div class="m-stat-lbl">🏆小組</div></div>
-  <div class="m-stat"><div class="m-stat-val">48</div><div class="m-stat-lbl">🌍隊伍</div></div>
-  <div class="m-stat"><div class="m-stat-val">12</div><div class="m-stat-lbl">📋分組</div></div>
-  <div class="m-stat"><div class="m-stat-val">16</div><div class="m-stat-lbl">🏟️場館</div></div>
+<div class="stats">
+  <div class="stat"><div class="stat-val">72</div><div class="stat-lbl">🏆 小組</div></div>
+  <div class="stat"><div class="stat-val">48</div><div class="stat-lbl">🌍 隊伍</div></div>
+  <div class="stat"><div class="stat-val">12</div><div class="stat-lbl">📋 分組</div></div>
+  <div class="stat"><div class="stat-val">16</div><div class="stat-lbl">🏟️ 場館</div></div>
 </div>
 
-<div class="m-tabs">
-  <button class="m-tab active" id="tabGroup" onclick="switchTab('group')">📋 小組賽</button>
-  <button class="m-tab" id="tabKO" onclick="switchTab('ko')">⚔️ 淘汰賽</button>
+<div class="main-tabs">
+  <button class="main-tab active" id="tabGroup" onclick="switchTab('group')">📋 小組賽</button>
+  <button class="main-tab" id="tabKO" onclick="switchTab('ko')">⚔️ 淘汰賽</button>
 </div>
 
-<!-- Group stage panel -->
+<!-- Group panel -->
 <div id="panelGroup">
-  <div class="m-group-btns" id="groupBtns"></div>
+  <div class="group-bar" id="groupBtns"></div>
   <div id="matchList"></div>
 </div>
 
 <!-- KO panel -->
 <div id="panelKO" style="display:none">
-  <div class="m-ko-wrap" id="koContent">
-    <div class="m-ko-note">⚠️ 淘汰賽對手依小組賽結果而定。所有時間為台灣時間（UTC+8）。← 左右滑動瀏覽 →</div>
-  </div>
+  <div class="ko-round-tabs" id="koRoundTabs"></div>
+  <div id="koList" class="ko-list"></div>
 </div>
 
 <script>
@@ -975,6 +1020,183 @@ function renderKO(){
 
 // Init
 renderGroup();
+renderMatches();
+
+// ── Render group buttons ──────────────────────────────────────────────────────
+function renderGroupBtns(){
+  const bar=document.getElementById('groupBtns');
+  const groups=['ALL','A','B','C','D','E','F','G','H','I','J','K','L'];
+  bar.innerHTML='';
+  groups.forEach(g=>{
+    const b=document.createElement('button');
+    b.className='gbtn'+(g===currentGroup?' active':'');
+    b.textContent=g==='ALL'?'全部':'G'+g;
+    const t=g==='ALL'?{bdr:'#334155',bg:'#334155'}:GT[g];
+    b.style.borderColor=t.bdr;
+    b.style.color=g===currentGroup?'#fff':t.bdr;
+    if(g===currentGroup) b.style.background=t.bdr;
+    b.onclick=()=>{currentGroup=g;renderGroupBtns();renderMatches();};
+    bar.appendChild(b);
+  });
+}
+
+// ── Render matches ────────────────────────────────────────────────────────────
+function renderMatches(){
+  const list=document.getElementById('matchList');
+  const filtered=currentGroup==='ALL'?matches:matches.filter(m=>m.g===currentGroup);
+
+  const byDate={};
+  filtered.forEach(m=>{
+    const d=fmtDate(m.cest);
+    if(!byDate[d]) byDate[d]=[];
+    byDate[d].push(m);
+  });
+
+  const wrap=document.createDocumentFragment();
+
+  Object.keys(byDate).forEach(date=>{
+    const dh=document.createElement('div');
+    dh.className='date-hdr';
+    dh.textContent='📅 '+date;
+    wrap.appendChild(dh);
+
+    byDate[date].forEach((m,i)=>{
+      const t=GT[m.g];
+      const zh1=TEAM_ZH[m.t1]||m.t1;
+      const zh2=TEAM_ZH[m.t2]||m.t2;
+      const guide=getGuide(m.t1,m.t2);
+      const venue=VENUE_SHORT[m.venue]||m.venue;
+      const gid='g'+m.cest.replace(/\W/g,'')+i;
+      const f1=m.t1.toLowerCase().replace(/ /g,'-').replace(/[^a-z-]/g,'');
+      const f2=m.t2.toLowerCase().replace(/ /g,'-').replace(/[^a-z-]/g,'');
+
+      const card=document.createElement('div');
+      card.className='match-card';
+      card.innerHTML=`
+        <div class="card-top">
+          <div class="group-pill" style="background:${t.bg};border:2px solid ${t.bdr}">
+            <span style="font-size:10px;color:${t.bdr};font-weight:900">GROUP ${m.g}</span>
+          </div>
+          <div style="text-align:right">
+            <div class="match-time">${fmtTime(m.cest)}</div>
+            <div class="match-date">${fmtDate(m.cest)}</div>
+          </div>
+        </div>
+        <div class="teams">
+          <div class="team-row">
+            <img class="flag" src="https://flagcdn.com/48x36/${f1}.png" alt="" onerror="this.style.display='none'">
+            <div class="team-info">
+              <div class="team-zh">${zh1}</div>
+              <div class="team-en">${m.t1}</div>
+            </div>
+          </div>
+          <div class="vs-divider">— VS —</div>
+          <div class="team-row">
+            <img class="flag" src="https://flagcdn.com/48x36/${f2}.png" alt="" onerror="this.style.display='none'">
+            <div class="team-info">
+              <div class="team-zh">${zh2}</div>
+              <div class="team-en">${m.t2}</div>
+            </div>
+          </div>
+        </div>
+        <div class="venue-row">📍 ${venue}</div>
+        ${guide?`
+        <button class="guide-btn" onclick="toggleGuide('${gid}')">
+          🔥 觀戰重點 <span class="guide-arrow" id="arr-${gid}">▼</span>
+        </button>
+        <div class="guide-body" id="${gid}">
+          <div class="guide-title">${guide.title}</div>
+          <div class="guide-text">${guide.body}</div>
+          <div class="guide-key">
+            <div class="guide-key-lbl">⭐ 關鍵球員</div>
+            <div class="guide-key-text">${guide.key}</div>
+          </div>
+        </div>`:''}`;
+      wrap.appendChild(card);
+    });
+  });
+
+  list.innerHTML='';
+  list.appendChild(wrap);
+}
+
+function toggleGuide(id){
+  const el=document.getElementById(id);
+  const arr=document.getElementById('arr-'+id);
+  const open=el.classList.contains('open');
+  el.classList.toggle('open',!open);
+  arr.classList.toggle('open',!open);
+}
+
+// ── Tab switch ────────────────────────────────────────────────────────────────
+function switchTab(tab){
+  const isGroup=tab==='group';
+  document.getElementById('panelGroup').style.display=isGroup?'block':'none';
+  document.getElementById('panelKO').style.display=isGroup?'none':'block';
+  document.getElementById('tabGroup').classList.toggle('active',isGroup);
+  document.getElementById('tabKO').classList.toggle('active',!isGroup);
+  if(!isGroup && !document.getElementById('koRoundTabs').dataset.built) buildKOTabs();
+}
+
+// ── KO: round-tab design (no bracket, just clean cards per round) ─────────────
+const KO_ROUND_LABELS=[
+  '32強','16強','準決賽','四強','季軍賽','決賽 🏆'
+];
+let currentKORound=0;
+
+function buildKOTabs(){
+  const tabs=document.getElementById('koRoundTabs');
+  tabs.dataset.built='1';
+  KO_ROUNDS.forEach((r,i)=>{
+    const btn=document.createElement('button');
+    btn.className='ko-rtab'+(i===0?' active':'');
+    btn.textContent=KO_ROUND_LABELS[i]||r.shortLabel||('Round '+i);
+    btn.onclick=()=>{ currentKORound=i; renderKORound(i);
+      tabs.querySelectorAll('.ko-rtab').forEach((b,j)=>b.classList.toggle('active',j===i)); };
+    tabs.appendChild(btn);
+  });
+  renderKORound(0);
+}
+
+function renderKORound(idx){
+  const r=KO_ROUNDS[idx];
+  const list=document.getElementById('koList');
+  list.innerHTML='';
+
+  // Note
+  const note=document.createElement('div');
+  note.className='ko-note';
+  note.textContent='⚠️ 對手依小組賽結果確認後更新。所有時間為台灣時間（UTC+8）。';
+  list.appendChild(note);
+
+  r.matches.forEach(m=>{
+    const cls=m.isFinal?'ko-card final-card':m.isThird?'ko-card third-card':'ko-card';
+    const card=document.createElement('div');
+    card.className=cls;
+    const mkTeam=t=>t.tbd
+      ?`<div class="ko-tbd">${t.name}</div>`
+      :`<img class="ko-flag" src="https://flagcdn.com/48x36/${t.code}.png" alt="" onerror="this.style.display='none'">
+        <div class="ko-team-name">${t.name}</div>`;
+    card.innerHTML=`
+      <div class="ko-card-hdr">
+        <span class="ko-match-id">${m.id||''}</span>
+        <div style="text-align:right">
+          <div class="ko-match-time">${m.time}</div>
+          <div class="ko-match-date">${m.date}</div>
+        </div>
+      </div>
+      <div class="ko-teams">
+        <div class="ko-team-row">${mkTeam(m.home)}</div>
+        <div class="vs-divider" style="padding:4px 0;font-size:11px;color:#cbd5e1;font-weight:700;letter-spacing:.1em">— VS —</div>
+        <div class="ko-team-row">${mkTeam(m.away)}</div>
+      </div>
+      <div class="ko-venue">📍 ${m.venue}</div>`;
+    list.appendChild(card);
+  });
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+renderGroupBtns();
 renderMatches();
 </script>
 </body>
