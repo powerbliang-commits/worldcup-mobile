@@ -76,6 +76,44 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 .guide-key-lbl{font-size:10px;font-weight:800;text-transform:uppercase;color:#b45309;letter-spacing:.06em;margin-bottom:4px}
 .guide-key-text{font-size:13px;color:#1e293b;line-height:1.7}
 
+
+/* ── Search bar ── */
+.search-toggle{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:9px 14px;background:#fff;border-bottom:1px solid #e2e8f0;
+  cursor:pointer;position:sticky;top:167px;z-index:197;
+}
+.search-toggle-label{font-size:13px;font-weight:700;color:#475569;
+  display:flex;align-items:center;gap:6px}
+.search-toggle-arrow{font-size:11px;color:#94a3b8;transition:transform .2s}
+.search-toggle-arrow.open{transform:rotate(180deg)}
+.search-panel{
+  display:none;padding:10px 14px;background:#fff;
+  border-bottom:2px solid #e2e8f0;gap:8px;flex-direction:column;
+}
+.search-panel.open{display:flex}
+.search-row{display:flex;gap:8px;align-items:center}
+.search-input{
+  flex:1;padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:99px;
+  font-size:14px;font-family:inherit;outline:none;background:#f8faff;
+  color:#0f172a;
+}
+.search-input:focus{border-color:#3b82f6;background:#fff}
+.search-select{
+  flex:1;padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:99px;
+  font-size:14px;font-family:inherit;outline:none;background:#f8faff;
+  color:#0f172a;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;
+  padding-right:32px;
+}
+.search-clear{
+  padding:9px 14px;border-radius:99px;border:1.5px solid #e2e8f0;
+  background:#fff;font-size:13px;font-weight:700;color:#64748b;
+  cursor:pointer;font-family:inherit;white-space:nowrap;
+}
+.match-count{font-size:11px;color:#94a3b8;font-weight:600;text-align:right}
+
 .ko-tabs{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid #e2e8f0;
   position:sticky;top:119px;z-index:198;scrollbar-width:none}
 .ko-tabs::-webkit-scrollbar{display:none}
@@ -127,6 +165,22 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 </div>
 <div id="panelGroup">
   <div class="group-bar" id="groupBtns"></div>
+  <button class="search-toggle" id="searchToggle" onclick="toggleSearch()">
+    <span class="search-toggle-label">🔍 搜尋球隊 / 篩選日期</span>
+    <span class="search-toggle-arrow" id="searchArrow">▼</span>
+  </button>
+  <div class="search-panel" id="searchPanel">
+    <div class="search-row">
+      <input class="search-input" id="teamSearch" type="text" placeholder="🔍 搜尋球隊（中文或英文）" oninput="renderMatches()">
+    </div>
+    <div class="search-row">
+      <select class="search-select" id="dateFilter" onchange="renderMatches()">
+        <option value="">📅 全部日期</option>
+      </select>
+      <button class="search-clear" onclick="clearSearch()">✕ 清除</button>
+    </div>
+    <div class="match-count" id="matchCount"></div>
+  </div>
   <div id="matchList"></div>
 </div>
 <div id="panelKO" style="display:none">
@@ -677,9 +731,55 @@ function renderGroupBtns(){
   });
 }
 
+function populateDateFilter(){
+  var sel=document.getElementById('dateFilter');
+  if(!sel||sel.options.length>1) return;
+  var dates={};
+  matches.forEach(function(m){dates[fmtDate(m.cest)]=1;});
+  Object.keys(dates).forEach(function(d){
+    var opt=document.createElement('option');opt.value=d;opt.textContent=d;sel.appendChild(opt);
+  });
+}
+
+function toggleSearch(){
+  var panel=document.getElementById('searchPanel');
+  var arrow=document.getElementById('searchArrow');
+  var open=panel.classList.contains('open');
+  panel.classList.toggle('open',!open);
+  arrow.classList.toggle('open',!open);
+  if(!open) populateDateFilter();
+}
+
+function clearSearch(){
+  var ts=document.getElementById('teamSearch');
+  var df=document.getElementById('dateFilter');
+  if(ts) ts.value='';
+  if(df) df.value='';
+  renderMatches();
+}
+
 function renderMatches(){
   var list=document.getElementById('matchList');
-  var filtered=currentGroup==='ALL'?matches:matches.filter(function(m){return m.g===currentGroup;});
+  var searchVal=(document.getElementById('teamSearch')||{}).value||'';
+  var dateVal=(document.getElementById('dateFilter')||{}).value||'';
+  searchVal=searchVal.toLowerCase().trim();
+
+  var filtered=matches.filter(function(m){
+    if(currentGroup!=='ALL' && m.g!==currentGroup) return false;
+    if(dateVal && fmtDate(m.cest)!==dateVal) return false;
+    if(searchVal){
+      var zh1=(TEAM_ZH[m.t1]||'').toLowerCase();
+      var zh2=(TEAM_ZH[m.t2]||'').toLowerCase();
+      var en1=m.t1.toLowerCase(), en2=m.t2.toLowerCase();
+      if(zh1.indexOf(searchVal)<0 && zh2.indexOf(searchVal)<0 &&
+         en1.indexOf(searchVal)<0 && en2.indexOf(searchVal)<0) return false;
+    }
+    return true;
+  });
+
+  var cnt=document.getElementById('matchCount');
+  if(cnt) cnt.textContent=filtered.length+'場賽事';
+
   var byDate={};
   filtered.forEach(function(m){
     var d=fmtDate(m.cest);
