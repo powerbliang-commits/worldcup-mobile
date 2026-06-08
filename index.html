@@ -156,25 +156,25 @@ html,body{
 .ko-card.third-card{border:2px solid #10B981;}
 .ko-card-hdr{
   display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px;background:#f8faff;border-bottom:1px solid #f1f5f9;
+  padding:10px 14px;background:#1e3a8a;border-bottom:1px solid #1e3a8a;
 }
-.ko-card.final-card .ko-card-hdr{background:#FFFBEB;}
-.ko-card.third-card .ko-card-hdr{background:#F0FDF4;}
-.ko-match-id{font-size:11px;font-weight:800;color:#94a3b8}
-.ko-match-time{font-size:20px;font-weight:900;color:#1e40af}
-.ko-match-date{font-size:11px;color:#94a3b8}
+.ko-card.final-card .ko-card-hdr{background:#92400E;}
+.ko-card.third-card .ko-card-hdr{background:#065F46;}
+.ko-match-id{font-size:11px;font-weight:800;color:#93c5fd}
+.ko-match-time{font-size:22px;font-weight:900;color:#fff}
+.ko-match-date{font-size:12px;color:#bfdbfe;font-weight:600}
 .ko-teams{padding:12px 14px}
 .ko-team-row{display:flex;align-items:center;gap:10px;padding:5px 0}
 .ko-team-row+.ko-team-row{border-top:1px solid #f8faff;margin-top:4px;padding-top:9px}
 .ko-flag{width:30px;height:20px;object-fit:cover;border-radius:3px;
   border:1px solid rgba(0,0,0,.1);flex-shrink:0}
-.ko-team-name{font-size:17px;font-weight:800;color:#0f172a}
-.ko-tbd{font-size:15px;color:#94a3b8;font-style:italic}
+.ko-team-name{font-size:18px;font-weight:800;color:#0f172a}
+.ko-tbd{font-size:16px;color:#334155;font-style:italic;font-weight:600}
 .ko-venue{padding:8px 14px;background:#f8faff;border-top:1px solid #f1f5f9;
-  font-size:12px;color:#64748b;display:flex;align-items:center;gap:4px}
+  font-size:12px;color:#334155;font-weight:600;display:flex;align-items:center;gap:4px}
 .ko-note{margin:10px 12px;padding:10px 14px;background:#fff;
-  border-radius:12px;font-size:12px;color:#64748b;line-height:1.7;
-  border-left:4px solid #94a3b8}
+  border-radius:12px;font-size:12px;color:#475569;line-height:1.7;
+  border-left:4px solid #64748b;font-weight:500}
 
 /* Empty */
 .empty{text-align:center;padding:50px 20px;color:#94a3b8;font-size:14px}
@@ -1022,6 +1022,25 @@ function renderKO(){
 renderGroup();
 renderMatches();
 
+const FLAG_CODE={
+  'Mexico':'mx','South Africa':'za','South Korea':'kr','Czechia':'cz',
+  'Canada':'ca','Bosnia & Herzegovina':'ba','Qatar':'qa','Switzerland':'ch',
+  'Brazil':'br','Morocco':'ma','Haiti':'ht','Scotland':'gb-sct',
+  'USA':'us','Paraguay':'py','Australia':'au','Turkey':'tr',
+  'Germany':'de','Curaçao':'cw','Ivory Coast':'ci','Ecuador':'ec',
+  'Netherlands':'nl','Japan':'jp','Sweden':'se','Tunisia':'tn',
+  'Belgium':'be','Egypt':'eg','Iran':'ir','New Zealand':'nz',
+  'Spain':'es','Cape Verde':'cv','Saudi Arabia':'sa','Uruguay':'uy',
+  'France':'fr','Senegal':'sn','Iraq':'iq','Norway':'no',
+  'Argentina':'ar','Algeria':'dz','Austria':'at','Jordan':'jo',
+  'Portugal':'pt','DR Congo':'cd','Uzbekistan':'uz','Colombia':'co',
+  'England':'gb-eng','Panama':'pa','Croatia':'hr','Ghana':'gh',
+};
+function flagUrl(team){
+  const code=FLAG_CODE[team]||team.toLowerCase().replace(/ /g,'-').replace(/[^a-z-]/g,'');
+  return 'https://flagcdn.com/32x24/'+code+'.png';
+}
+
 // ── Render group buttons ──────────────────────────────────────────────────────
 function renderGroupBtns(){
   const bar=document.getElementById('groupBtns');
@@ -1067,15 +1086,14 @@ function renderMatches(){
       const guide=getGuide(m.t1,m.t2);
       const venue=VENUE_SHORT[m.venue]||m.venue;
       const gid='g'+m.cest.replace(/\W/g,'')+i;
-      const f1=m.t1.toLowerCase().replace(/ /g,'-').replace(/[^a-z-]/g,'');
-      const f2=m.t2.toLowerCase().replace(/ /g,'-').replace(/[^a-z-]/g,'');
+      
 
       const card=document.createElement('div');
       card.className='match-card';
       card.innerHTML=`
         <div class="card-top">
           <div class="group-pill" style="background:${t.bg};border:2px solid ${t.bdr}">
-            <span style="font-size:10px;color:${t.bdr};font-weight:900">GROUP ${m.g}</span>
+            <span style="font-size:10px;color:${t.bdr};font-weight:900">${m.g}</span>
           </div>
           <div style="text-align:right">
             <div class="match-time">${fmtTime(m.cest)}</div>
@@ -1084,7 +1102,7 @@ function renderMatches(){
         </div>
         <div class="teams">
           <div class="team-row">
-            <img class="flag" src="https://flagcdn.com/48x36/${f1}.png" alt="" onerror="this.style.display='none'">
+            <img class="flag" src="${flagUrl(m.t1)}" alt="" onerror="this.style.display='none'">
             <div class="team-info">
               <div class="team-zh">${zh1}</div>
               <div class="team-en">${m.t1}</div>
@@ -1092,7 +1110,7 @@ function renderMatches(){
           </div>
           <div class="vs-divider">— VS —</div>
           <div class="team-row">
-            <img class="flag" src="https://flagcdn.com/48x36/${f2}.png" alt="" onerror="this.style.display='none'">
+            <img class="flag" src="${flagUrl(m.t2)}" alt="" onerror="this.style.display='none'">
             <div class="team-info">
               <div class="team-zh">${zh2}</div>
               <div class="team-en">${m.t2}</div>
@@ -1175,7 +1193,7 @@ function renderKORound(idx){
     card.className=cls;
     const mkTeam=t=>t.tbd
       ?`<div class="ko-tbd">${t.name}</div>`
-      :`<img class="ko-flag" src="https://flagcdn.com/48x36/${t.code}.png" alt="" onerror="this.style.display='none'">
+      :`<img class="ko-flag" src="https://flagcdn.com/32x24/${t.code}.png" alt="" onerror="this.style.display='none'">
         <div class="ko-team-name">${t.name}</div>`;
     card.innerHTML=`
       <div class="ko-card-hdr">
