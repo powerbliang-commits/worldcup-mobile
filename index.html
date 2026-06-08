@@ -2,31 +2,20 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>2026 FIFA World Cup</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  background:#F0F4FF;color:#0f172a;
-  min-height:100vh;height:auto;
-  overflow-x:hidden;overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-  font-size:16px;
-}
+html,body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#F0F4FF;color:#0f172a;min-height:100vh;height:auto;
+  overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;font-size:16px}
 
-/* ── Header ── */
-.hdr{
-  background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 100%);
-  padding:14px 16px 12px;
-  position:sticky;top:0;z-index:200;
-}
-.hdr-title{font-size:17px;font-weight:900;color:#fff;letter-spacing:-.3px}
-.hdr-sub{font-size:11px;color:#93c5fd;margin-top:3px;line-height:1.4}
+.hdr{background:linear-gradient(135deg,#1e3a8a,#1d4ed8);padding:14px 16px 12px;
+  position:sticky;top:0;z-index:200}
+.hdr-title{font-size:17px;font-weight:900;color:#fff}
+.hdr-sub{font-size:11px;color:#93c5fd;margin-top:3px}
 
-/* ── Stats ── */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;
-  border-bottom:2px solid #e2e8f0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-bottom:2px solid #e2e8f0}
 .stat{text-align:center;padding:10px 4px;border-top:3px solid}
 .stat:nth-child(1){border-color:#3B82F6;background:#EFF6FF}
 .stat:nth-child(2){border-color:#10B981;background:#ECFDF5}
@@ -35,180 +24,114 @@ html,body{
 .stat-val{font-size:20px;font-weight:900;color:#0f172a;line-height:1}
 .stat-lbl{font-size:10px;color:#475569;font-weight:600;margin-top:2px}
 
-/* ── Main Tab ── */
-.main-tabs{display:flex;background:#fff;border-bottom:3px solid #e2e8f0;
-  position:sticky;top:69px;z-index:199}
-.main-tab{flex:1;padding:13px 0;font-size:15px;font-weight:700;
-  border:none;background:none;cursor:pointer;color:#64748b;font-family:inherit;
+.main-tabs{display:flex;background:#fff;border-bottom:3px solid #e2e8f0;position:sticky;top:68px;z-index:199}
+.main-tab{flex:1;padding:13px 0;font-size:15px;font-weight:700;border:none;
+  background:none;cursor:pointer;color:#64748b;font-family:inherit;
   border-bottom:4px solid transparent;margin-bottom:-3px}
 .main-tab.active{color:#1e40af;border-bottom-color:#1e40af;background:#f0f6ff}
 
-/* ── Group buttons ── */
-.group-bar{
-  display:flex;overflow-x:auto;gap:8px;padding:10px 14px;
+.group-bar{display:flex;overflow-x:auto;gap:8px;padding:10px 14px;
   background:#fff;border-bottom:1px solid #e2e8f0;
-  position:sticky;top:120px;z-index:198;
-  scrollbar-width:none;-ms-overflow-style:none;
-}
+  position:sticky;top:119px;z-index:198;scrollbar-width:none}
 .group-bar::-webkit-scrollbar{display:none}
-.gbtn{
-  padding:7px 14px;border-radius:99px;font-size:13px;font-weight:700;
-  border:2.5px solid;cursor:pointer;background:#fff;font-family:inherit;
-  white-space:nowrap;flex-shrink:0;
-}
+.gbtn{padding:7px 16px;border-radius:99px;font-size:14px;font-weight:800;
+  border:2.5px solid;cursor:pointer;background:#fff;font-family:inherit;white-space:nowrap;flex-shrink:0}
 .gbtn.active{color:#fff}
 
-/* ── Date header ── */
-.date-hdr{
-  padding:12px 16px 8px;font-size:12px;font-weight:800;
-  color:#64748b;text-transform:uppercase;letter-spacing:.08em;
-  background:#F0F4FF;border-bottom:1px solid #dde4f0;
-  position:sticky;top:169px;z-index:197;
-}
+.date-hdr{padding:12px 16px 8px;font-size:12px;font-weight:800;color:#64748b;
+  text-transform:uppercase;letter-spacing:.08em;background:#F0F4FF;
+  border-bottom:1px solid #dde4f0}
 
-/* ── Match card ── */
-.match-card{
-  background:#fff;margin:8px 12px;border-radius:16px;
-  box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden;
-}
+.match-card{background:#fff;margin:8px 12px;border-radius:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);overflow:hidden}
+.card-top{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px 8px;border-bottom:1px solid #f1f5f9}
+.group-pill{display:inline-flex;align-items:center;padding:5px 12px;
+  border-radius:99px;font-size:13px;font-weight:900;border:2.5px solid}
+.match-time{font-size:24px;font-weight:900;color:#1e40af;line-height:1}
+.match-date{font-size:11px;color:#94a3b8;text-align:right;margin-top:2px}
 
-/* Card top: group badge + time */
-.card-top{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px 8px;border-bottom:1px solid #f1f5f9;
-}
-.group-pill{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:4px 10px;border-radius:99px;font-size:12px;font-weight:800;
-}
-.match-time{font-size:22px;font-weight:900;color:#1e40af;line-height:1}
-.match-date{font-size:11px;color:#94a3b8;text-align:right;margin-top:1px}
-
-/* Teams section */
 .teams{padding:12px 14px}
-.team-row{display:flex;align-items:center;gap:10px;padding:5px 0}
-.team-row+.team-row{border-top:1px solid #f8faff;margin-top:4px;padding-top:9px}
-.flag{width:32px;height:22px;object-fit:cover;border-radius:4px;
+.team-row{display:flex;align-items:center;gap:10px;padding:6px 0}
+.team-row+.team-row{border-top:1px solid #f1f5f9;margin-top:2px;padding-top:8px}
+.flag{width:36px;height:24px;object-fit:cover;border-radius:4px;
   border:1px solid rgba(0,0,0,.1);flex-shrink:0}
-.team-info{flex:1}
-.team-zh{font-size:18px;font-weight:800;color:#0f172a;line-height:1.2}
-.team-en{font-size:11px;color:#94a3b8;margin-top:1px}
-.vs-divider{text-align:center;font-size:11px;color:#cbd5e1;
-  font-weight:700;letter-spacing:.1em;padding:2px 0}
+.team-zh{font-size:19px;font-weight:800;color:#0f172a}
+.team-en{font-size:11px;color:#94a3b8;margin-left:2px}
+.vs-line{text-align:center;font-size:11px;color:#cbd5e1;
+  font-weight:700;letter-spacing:.1em;padding:1px 0}
 
-/* Venue */
-.venue-row{
-  display:flex;align-items:center;gap:5px;
-  padding:8px 14px;background:#f8faff;
-  font-size:12px;color:#64748b;font-weight:500;
-  border-top:1px solid #f1f5f9;
-}
+.venue-row{display:flex;align-items:center;gap:5px;padding:8px 14px;
+  background:#f8faff;border-top:1px solid #f1f5f9;font-size:12px;color:#475569;font-weight:500}
 
-/* Guide */
-.guide-btn{
-  width:100%;text-align:left;padding:11px 14px;
-  background:#EFF6FF;border:none;border-top:1px solid #BFDBFE;
-  cursor:pointer;font-size:13px;color:#1e40af;font-weight:700;
-  font-family:inherit;display:flex;align-items:center;justify-content:space-between;
-}
-.guide-arrow{font-size:12px;transition:transform .2s}
-.guide-arrow.open{transform:rotate(180deg)}
-.guide-body{
-  display:none;padding:14px;background:#f0f6ff;
-  border-top:1px solid #dbeafe;
-}
+.guide-btn{width:100%;text-align:left;padding:12px 14px;background:#EFF6FF;
+  border:none;border-top:1px solid #BFDBFE;cursor:pointer;
+  font-size:14px;color:#1e40af;font-weight:700;font-family:inherit;
+  display:flex;align-items:center;justify-content:space-between}
+.guide-body{display:none;padding:14px;background:#f0f6ff;border-top:1px solid #dbeafe}
 .guide-body.open{display:block}
-.guide-title{font-size:14px;font-weight:800;color:#1e3a8a;
-  margin-bottom:8px;line-height:1.4}
+.guide-title{font-size:14px;font-weight:800;color:#1e3a8a;margin-bottom:8px;line-height:1.5}
 .guide-text{font-size:13px;color:#334155;line-height:1.8}
-.guide-key{
-  margin-top:10px;padding:10px 12px;background:#fff;
-  border-radius:10px;border-left:4px solid #f59e0b;
-}
-.guide-key-lbl{font-size:10px;font-weight:800;text-transform:uppercase;
-  color:#b45309;letter-spacing:.06em;margin-bottom:4px}
+.guide-key{margin-top:10px;padding:10px 12px;background:#fff;border-radius:10px;border-left:4px solid #f59e0b}
+.guide-key-lbl{font-size:10px;font-weight:800;text-transform:uppercase;color:#b45309;letter-spacing:.06em;margin-bottom:4px}
 .guide-key-text{font-size:13px;color:#1e293b;line-height:1.7}
 
-/* ── KO: round tabs + cards ── */
-.ko-round-tabs{
-  display:flex;overflow-x:auto;gap:0;padding:0;
-  background:#fff;border-bottom:2px solid #e2e8f0;
-  position:sticky;top:120px;z-index:198;
-  scrollbar-width:none;
-}
-.ko-round-tabs::-webkit-scrollbar{display:none}
-.ko-rtab{
-  padding:12px 16px;font-size:13px;font-weight:700;border:none;
-  background:none;cursor:pointer;color:#64748b;font-family:inherit;
-  white-space:nowrap;border-bottom:3px solid transparent;flex-shrink:0;
-}
-.ko-rtab.active{color:#1e40af;border-bottom-color:#1e40af;background:#f0f6ff}
+.ko-tabs{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid #e2e8f0;
+  position:sticky;top:119px;z-index:198;scrollbar-width:none}
+.ko-tabs::-webkit-scrollbar{display:none}
+.ko-tab{padding:12px 18px;font-size:14px;font-weight:700;border:none;background:none;
+  cursor:pointer;color:#64748b;font-family:inherit;white-space:nowrap;
+  border-bottom:3px solid transparent;flex-shrink:0}
+.ko-tab.active{color:#1e40af;border-bottom-color:#1e40af;background:#f0f6ff}
 
 .ko-list{padding:10px 12px;display:flex;flex-direction:column;gap:10px}
-
-/* KO match card */
-.ko-card{
-  background:#fff;border-radius:16px;overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,.07);
-}
-.ko-card.final-card{box-shadow:0 4px 16px rgba(245,158,11,.25);
-  border:2px solid #F59E0B;}
-.ko-card.third-card{border:2px solid #10B981;}
-.ko-card-hdr{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px;background:#1e3a8a;border-bottom:1px solid #1e3a8a;
-}
-.ko-card.final-card .ko-card-hdr{background:#92400E;}
-.ko-card.third-card .ko-card-hdr{background:#065F46;}
-.ko-match-id{font-size:11px;font-weight:800;color:#93c5fd}
-.ko-match-time{font-size:22px;font-weight:900;color:#fff}
-.ko-match-date{font-size:12px;color:#bfdbfe;font-weight:600}
+.ko-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.ko-card.final-card{box-shadow:0 4px 16px rgba(245,158,11,.25);border:2px solid #F59E0B}
+.ko-card.third-card{border:2px solid #10B981}
+.ko-hdr{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;background:#1e3a8a}
+.ko-card.final-card .ko-hdr{background:#92400E}
+.ko-card.third-card .ko-hdr{background:#065F46}
+.ko-mid{font-size:12px;font-weight:800;color:#93c5fd}
+.ko-card.final-card .ko-mid,.ko-card.third-card .ko-mid{color:#a7f3d0}
+.ko-time{font-size:22px;font-weight:900;color:#fff;line-height:1}
+.ko-date{font-size:12px;color:#bfdbfe;font-weight:600;margin-top:2px}
+.ko-card.final-card .ko-date,.ko-card.third-card .ko-date{color:#fde68a}
 .ko-teams{padding:12px 14px}
-.ko-team-row{display:flex;align-items:center;gap:10px;padding:5px 0}
-.ko-team-row+.ko-team-row{border-top:1px solid #f8faff;margin-top:4px;padding-top:9px}
-.ko-flag{width:30px;height:20px;object-fit:cover;border-radius:3px;
+.ko-team-row{display:flex;align-items:center;gap:10px;padding:6px 0}
+.ko-team-row+.ko-team-row{border-top:1px solid #f1f5f9;margin-top:2px;padding-top:8px}
+.ko-flag{width:34px;height:23px;object-fit:cover;border-radius:4px;
   border:1px solid rgba(0,0,0,.1);flex-shrink:0}
-.ko-team-name{font-size:18px;font-weight:800;color:#0f172a}
-.ko-tbd{font-size:16px;color:#334155;font-style:italic;font-weight:600}
-.ko-venue{padding:8px 14px;background:#f8faff;border-top:1px solid #f1f5f9;
-  font-size:12px;color:#334155;font-weight:600;display:flex;align-items:center;gap:4px}
-.ko-note{margin:10px 12px;padding:10px 14px;background:#fff;
-  border-radius:12px;font-size:12px;color:#475569;line-height:1.7;
-  border-left:4px solid #64748b;font-weight:500}
-
-/* Empty */
-.empty{text-align:center;padding:50px 20px;color:#94a3b8;font-size:14px}
+.ko-name{font-size:18px;font-weight:800;color:#0f172a}
+.ko-tbd{font-size:16px;color:#475569;font-style:italic;font-weight:600}
+.ko-venue{display:flex;align-items:center;gap:5px;padding:8px 14px;
+  background:#f8faff;border-top:1px solid #f1f5f9;font-size:12px;color:#475569;font-weight:600}
+.ko-note{margin:0 0 8px;padding:10px 14px;background:#fff;border-radius:12px;
+  font-size:12px;color:#475569;line-height:1.7;border-left:4px solid #64748b;font-weight:500}
 </style>
 </head>
 <body>
-
 <div class="hdr">
   <div class="hdr-title">⚽ 2026 FIFA World Cup</div>
   <div class="hdr-sub">台灣時間（UTC+8）· 小組賽 6/11–6/28 · 淘汰賽 6/29–7/19</div>
 </div>
-
 <div class="stats">
   <div class="stat"><div class="stat-val">72</div><div class="stat-lbl">🏆 小組</div></div>
   <div class="stat"><div class="stat-val">48</div><div class="stat-lbl">🌍 隊伍</div></div>
   <div class="stat"><div class="stat-val">12</div><div class="stat-lbl">📋 分組</div></div>
   <div class="stat"><div class="stat-val">16</div><div class="stat-lbl">🏟️ 場館</div></div>
 </div>
-
 <div class="main-tabs">
   <button class="main-tab active" id="tabGroup" onclick="switchTab('group')">📋 小組賽</button>
   <button class="main-tab" id="tabKO" onclick="switchTab('ko')">⚔️ 淘汰賽</button>
 </div>
-
-<!-- Group panel -->
 <div id="panelGroup">
   <div class="group-bar" id="groupBtns"></div>
   <div id="matchList"></div>
 </div>
-
-<!-- KO panel -->
 <div id="panelKO" style="display:none">
-  <div class="ko-round-tabs" id="koRoundTabs"></div>
-  <div id="koList" class="ko-list"></div>
+  <div class="ko-tabs" id="koTabs"></div>
+  <div class="ko-list" id="koList"></div>
 </div>
 
 <script>
@@ -227,9 +150,23 @@ const GT={
   L:{bg:'#F5F3FF',bdr:'#4F46E5',bbg:'#4F46E5',btxt:'#fff'},
 };
 
+const FLAG_CODE={
+  'Mexico':'mx','South Africa':'za','South Korea':'kr','Czechia':'cz',
+  'Canada':'ca','Bosnia & Herzegovina':'ba','Qatar':'qa','Switzerland':'ch',
+  'Brazil':'br','Morocco':'ma','Haiti':'ht','Scotland':'gb-sct',
+  'USA':'us','Paraguay':'py','Australia':'au','Turkey':'tr',
+  'Germany':'de','Curaçao':'cw','Ivory Coast':'ci','Ecuador':'ec',
+  'Netherlands':'nl','Japan':'jp','Sweden':'se','Tunisia':'tn',
+  'Belgium':'be','Egypt':'eg','Iran':'ir','New Zealand':'nz',
+  'Spain':'es','Cape Verde':'cv','Saudi Arabia':'sa','Uruguay':'uy',
+  'France':'fr','Senegal':'sn','Iraq':'iq','Norway':'no',
+  'Argentina':'ar','Algeria':'dz','Austria':'at','Jordan':'jo',
+  'Portugal':'pt','DR Congo':'cd','Uzbekistan':'uz','Colombia':'co',
+  'England':'gb-eng','Panama':'pa','Croatia':'hr','Ghana':'gh',
+};
 const TEAM_ZH={
   'Mexico':'墨西哥','South Africa':'南非','South Korea':'南韓','Czechia':'捷克',
-  'Canada':'加拿大','Bosnia & Herzegovina':'波士尼亞','Qatar':'卡達','Switzerland':'瑞士',
+  'Canada':'加拿大','Bosnia & Herzegovina':'波斯尼亞','Qatar':'卡達','Switzerland':'瑞士',
   'Brazil':'巴西','Morocco':'摩洛哥','Haiti':'海地','Scotland':'蘇格蘭',
   'USA':'美國','Paraguay':'巴拉圭','Australia':'澳洲','Turkey':'土耳其',
   'Germany':'德國','Curaçao':'庫拉索','Ivory Coast':'象牙海岸','Ecuador':'厄瓜多',
@@ -240,6 +177,24 @@ const TEAM_ZH={
   'Argentina':'阿根廷','Algeria':'阿爾及利亞','Austria':'奧地利','Jordan':'約旦',
   'Portugal':'葡萄牙','DR Congo':'剛果民主共和國','Uzbekistan':'烏茲別克','Colombia':'哥倫比亞',
   'England':'英格蘭','Panama':'巴拿馬','Croatia':'克羅埃西亞','Ghana':'迦納',
+};
+const VENUE_SHORT={
+  'Estadio Azteca, Mexico City':'Azteca, Mexico City',
+  'Akron Stadium, Guadalajara':'Akron, Guadalajara',
+  'Estadio BBVA, Monterrey':'BBVA, Monterrey',
+  'SoFi Stadium, Los Angeles':'SoFi, Los Angeles',
+  "Levi's Stadium, San Francisco Bay Area":"Levi's, San Francisco",
+  'Lumen Field, Seattle':'Lumen Field, Seattle',
+  'BC Place, Vancouver':'BC Place, Vancouver',
+  'BMO Field, Toronto':'BMO Field, Toronto',
+  'NRG Stadium, Houston':'NRG, Houston',
+  'AT&T Stadium, Dallas':'AT&T, Dallas',
+  'Arrowhead Stadium, Kansas City':'Arrowhead, Kansas City',
+  'Hard Rock Stadium, Miami':'Hard Rock, Miami',
+  'Mercedes-Benz Stadium, Atlanta':'Mercedes-Benz, Atlanta',
+  'Lincoln Financial Field, Philadelphia':'Lincoln Financial, Philadelphia',
+  'MetLife Stadium, New York/New Jersey':'MetLife, New York/NJ',
+  'Gillette Stadium, Boston':'Gillette, Boston',
 };
 
 const matches=[
@@ -316,7 +271,6 @@ const matches=[
   {g:'J',t1:'Algeria',t2:'Austria',cest:'2026-06-28T04:00',venue:'Arrowhead Stadium, Kansas City'},
   {g:'J',t1:'Jordan',t2:'Argentina',cest:'2026-06-28T04:00',venue:'AT&T Stadium, Dallas'},
 ];
-
 const GUIDES={
   'Mexico|South Africa':{
     title:'2010世界盃開幕戰歷史重演！',
@@ -691,150 +645,105 @@ const GUIDES={
   },
 };
 
-function getGuide(t1,t2){
-  return GUIDES[`${t1}|${t2}`]||GUIDES[`${t2}|${t1}`]||null;
-}
+function getGuide(t1,t2){return GUIDES[t1+'|'+t2]||GUIDES[t2+'|'+t1]||null;}
+function flagUrl(t){return 'https://flagcdn.com/48x36/'+(FLAG_CODE[t]||t.toLowerCase().replace(/ /g,'-').replace(/[^a-z-]/g,''))+'.png';}
 
-const VENUE_SHORT={
-  'Estadio Azteca, Mexico City':'Azteca, Mexico City',
-  'Akron Stadium, Guadalajara':'Akron, Guadalajara',
-  'Estadio BBVA, Monterrey':'BBVA, Monterrey',
-  'SoFi Stadium, Los Angeles':'SoFi, Los Angeles',
-  "Levi's Stadium, San Francisco Bay Area":"Levi's, San Francisco",
-  'Lumen Field, Seattle':'Lumen Field, Seattle',
-  'BC Place, Vancouver':'BC Place, Vancouver',
-  'BMO Field, Toronto':'BMO Field, Toronto',
-  'NRG Stadium, Houston':'NRG, Houston',
-  'AT&T Stadium, Dallas':'AT&T, Dallas',
-  'Arrowhead Stadium, Kansas City':'Arrowhead, Kansas City',
-  'Hard Rock Stadium, Miami':'Hard Rock, Miami',
-  'Mercedes-Benz Stadium, Atlanta':'Mercedes-Benz, Atlanta',
-  'Lincoln Financial Field, Philadelphia':'Lincoln Financial, Philadelphia',
-  'MetLife Stadium, New York/New Jersey':'MetLife, New York/NJ',
-  'Gillette Stadium, Boston':'Gillette, Boston',
-};
-
-// Date formatting
 function fmtDate(iso){
-  const d=new Date(iso+'Z');
-  const tw=new Date(d.getTime()+8*3600000);
-  const days=['週日','週一','週二','週三','週四','週五','週六'];
-  return `${tw.getUTCMonth()+1}/${tw.getUTCDate()} ${days[tw.getUTCDay()]}`;
+  var d=new Date(iso+'Z'),tw=new Date(d.getTime()+8*3600000);
+  var days=['週日','週一','週二','週三','週四','週五','週六'];
+  return (tw.getUTCMonth()+1)+'/'+(tw.getUTCDate())+' '+days[tw.getUTCDay()];
 }
 function fmtTime(iso){
-  const d=new Date(iso+'Z');
-  const tw=new Date(d.getTime()+8*3600000);
-  return String(tw.getUTCHours()).padStart(2,'0')+':'+String(tw.getUTCMinutes()).padStart(2,'0');
+  var d=new Date(iso+'Z'),tw=new Date(d.getTime()+8*3600000);
+  return ('0'+tw.getUTCHours()).slice(-2)+':'+('0'+tw.getUTCMinutes()).slice(-2);
 }
 
-// Current group filter
-let currentGroup='ALL';
+var currentGroup='ALL';
 
-function renderGroup(){
-  const btns=document.getElementById('groupBtns');
-  const groups=['ALL','A','B','C','D','E','F','G','H','I','J','K','L'];
-  btns.innerHTML='';
-  groups.forEach(g=>{
-    const b=document.createElement('button');
-    b.className='m-gbtn'+(g===currentGroup?' active':'');
-    b.textContent=g==='ALL'?'全部小組':'Group '+g;
-    if(g!=='ALL'){
-      const t=GT[g];
-      b.style.borderColor=t.bdr;
-      b.style.color=g===currentGroup?'#fff':t.bdr;
-      if(g===currentGroup) b.style.background=t.bdr;
-    } else {
-      b.style.borderColor='#334155';
-      b.style.color=g===currentGroup?'#fff':'#334155';
-      if(g===currentGroup) b.style.background='#334155';
-    }
-    b.onclick=()=>{ currentGroup=g; renderGroup(); renderMatches(); };
-    btns.appendChild(b);
+function renderGroupBtns(){
+  var bar=document.getElementById('groupBtns');
+  var groups=['ALL','A','B','C','D','E','F','G','H','I','J','K','L'];
+  bar.innerHTML='';
+  groups.forEach(function(g){
+    var b=document.createElement('button');
+    b.className='gbtn'+(g===currentGroup?' active':'');
+    b.textContent=g==='ALL'?'全部':g;
+    var col=g==='ALL'?'#334155':(GT[g]?GT[g].bdr:'#334155');
+    b.style.borderColor=col;
+    b.style.color=g===currentGroup?'#fff':col;
+    if(g===currentGroup) b.style.background=col;
+    b.onclick=function(){currentGroup=g;renderGroupBtns();renderMatches();};
+    bar.appendChild(b);
   });
 }
 
 function renderMatches(){
-  const list=document.getElementById('matchList');
-  const filtered=currentGroup==='ALL'?matches:matches.filter(m=>m.g===currentGroup);
-
-  // Group by date
-  const byDate={};
-  filtered.forEach(m=>{
-    const d=fmtDate(m.cest);
+  var list=document.getElementById('matchList');
+  var filtered=currentGroup==='ALL'?matches:matches.filter(function(m){return m.g===currentGroup;});
+  var byDate={};
+  filtered.forEach(function(m){
+    var d=fmtDate(m.cest);
     if(!byDate[d]) byDate[d]=[];
     byDate[d].push(m);
   });
-
-  let html='';
-  Object.keys(byDate).forEach(date=>{
-    html+=`<div class="m-date-hdr">📅 ${date}</div>`;
-    byDate[date].forEach((m,i)=>{
-      const t=GT[m.g];
-      const zh1=TEAM_ZH[m.t1]||m.t1;
-      const zh2=TEAM_ZH[m.t2]||m.t2;
-      const guide=getGuide(m.t1,m.t2);
-      const venue=VENUE_SHORT[m.venue]||m.venue;
-      const cardId=`card-${m.cest}-${i}`;
-      html+=`<div class="m-card">
-        <div class="m-card-top">
-          <div class="m-group-badge" style="background:${t.bg};border:2px solid ${t.bdr}">
-            <span style="color:${t.bdr};font-size:8px;font-weight:900">G${m.g}</span>
-          </div>
-          <div class="m-teams">
-            <div class="m-team-row">
-              <img class="m-flag" src="https://flagcdn.com/32x24/${m.t1.toLowerCase().replace(/ /g,'-').replace(/[^a-z-]/g,'')}.png" alt="" onerror="this.style.display='none'">
-              <span class="m-team-zh">${zh1}</span>
-              <span class="m-team-en">${m.t1}</span>
-            </div>
-            <div class="m-vs">vs</div>
-            <div class="m-team-row">
-              <img class="m-flag" src="https://flagcdn.com/32x24/${m.t2.toLowerCase().replace(/ /g,'-').replace(/[^a-z-]/g,'')}.png" alt="" onerror="this.style.display='none'">
-              <span class="m-team-zh">${zh2}</span>
-              <span class="m-team-en">${m.t2}</span>
-            </div>
-          </div>
-          <div class="m-time-col">
-            <div class="m-time">${fmtTime(m.cest)}</div>
-            <div class="m-date">${fmtDate(m.cest)}</div>
-          </div>
-        </div>
-        <div class="m-venue">📍 ${venue}</div>
-        ${guide?`<button class="m-guide-btn" onclick="toggleGuide('${cardId}')">
-          🔥 觀戰指南 <span id="arr-${cardId}">▼</span>
-        </button>
-        <div class="m-guide-body" id="${cardId}">
-          <div class="m-guide-title">${guide.title}</div>
-          <div>${guide.body}</div>
-          <div class="m-guide-key"><div class="m-guide-key-lbl">⭐ 關鍵球員</div>${guide.key}</div>
-        </div>`:''}
-      </div>`;
+  var html='';
+  Object.keys(byDate).forEach(function(date){
+    html+='<div class="date-hdr">📅 '+date+'</div>';
+    byDate[date].forEach(function(m,i){
+      var t=GT[m.g]||{bg:'#f1f5f9',bdr:'#64748b'};
+      var zh1=TEAM_ZH[m.t1]||m.t1, zh2=TEAM_ZH[m.t2]||m.t2;
+      var guide=getGuide(m.t1,m.t2);
+      var venue=VENUE_SHORT[m.venue]||m.venue;
+      var gid='g'+i+m.cest.replace(/[^0-9]/g,'');
+      html+='<div class="match-card">'
+        +'<div class="card-top">'
+        +'<div class="group-pill" style="background:'+t.bg+';border-color:'+t.bdr+';color:'+t.bdr+'">'+m.g+'</div>'
+        +'<div style="text-align:right"><div class="match-time">'+fmtTime(m.cest)+'</div>'
+        +'<div class="match-date">'+fmtDate(m.cest)+'</div></div>'
+        +'</div>'
+        +'<div class="teams">'
+        +'<div class="team-row"><img class="flag" src="'+flagUrl(m.t1)+'" alt="">'
+        +'<span class="team-zh">'+zh1+'</span><span class="team-en">'+m.t1+'</span></div>'
+        +'<div class="vs-line">— VS —</div>'
+        +'<div class="team-row"><img class="flag" src="'+flagUrl(m.t2)+'" alt="">'
+        +'<span class="team-zh">'+zh2+'</span><span class="team-en">'+m.t2+'</span></div>'
+        +'</div>'
+        +'<div class="venue-row">📍 '+venue+'</div>';
+      if(guide){
+        html+='<button class="guide-btn" onclick="toggleGuide(\''+gid+'\')">'
+          +'🔥 觀戰重點 <span id="arr-'+gid+'">▼</span></button>'
+          +'<div class="guide-body" id="'+gid+'">'
+          +'<div class="guide-title">'+guide.title+'</div>'
+          +'<div class="guide-text">'+guide.body+'</div>'
+          +'<div class="guide-key"><div class="guide-key-lbl">⭐ 關鍵球員</div>'
+          +'<div class="guide-key-text">'+guide.key+'</div></div>'
+          +'</div>';
+      }
+      html+='</div>';
     });
   });
-
-  if(!html) html='<div style="text-align:center;padding:40px;color:#94a3b8">找不到賽事</div>';
+  if(!html) html='<div style="text-align:center;padding:50px;color:#94a3b8">找不到賽事</div>';
   list.innerHTML=html;
 }
 
 function toggleGuide(id){
-  const el=document.getElementById(id);
-  const arr=document.getElementById('arr-'+id);
-  const open=el.classList.contains('open');
+  var el=document.getElementById(id),arr=document.getElementById('arr-'+id);
+  var open=el.classList.contains('open');
   el.classList.toggle('open',!open);
   arr.textContent=open?'▼':'▲';
 }
 
-// Tab switching
 function switchTab(tab){
-  const isGroup=tab==='group';
+  var isGroup=tab==='group';
   document.getElementById('panelGroup').style.display=isGroup?'block':'none';
   document.getElementById('panelKO').style.display=isGroup?'none':'block';
   document.getElementById('tabGroup').classList.toggle('active',isGroup);
   document.getElementById('tabKO').classList.toggle('active',!isGroup);
-  if(!isGroup) renderKO();
+  if(!isGroup && !document.getElementById('koTabs').dataset.built) buildKOTabs();
 }
 
-// ── KO Bracket ────────────────────────────────────────────────────────────────
-function tbd(desc){return{name:desc,code:'',tbd:true}}
+// ── KO round tabs ─────────────────────────────────────────────────────────────
+function tbd(desc){return{name:desc,code:'',tbd:true};}
 
 const KO_ROUNDS=[
   // R32: 16 matches (M73-M88), display order arranged so bracket pairs are adjacent
@@ -893,327 +802,51 @@ const KO_ROUNDS=[
   ]},
 ];
 
-const BRACKET_R32_ORDER  = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
-const BRACKET_R32_PAIRS  = [[0,1],[2,3],[4,5],[6,7],[8,9],[10,11],[12,13],[14,15]];
-// R16: [M90,M89,M91,M92,M93,M94,M95,M96] — consecutive pairs feed QF
-const BRACKET_R16_ORDER  = [0,1,2,3,4,5,6,7];
-const BRACKET_R16_PAIRS  = [[0,1],[2,3],[4,5],[6,7]];
-// QF: [M97,M98,M99,M100] — consecutive pairs feed SF
-const BRACKET_QF_ORDER   = [0,1,2,3];
-const BRACKET_QF_PAIRS   = [[0,1],[2,3]];
-// SF
-const BRACKET_SF_ORDER   = [0,1];
-const BRACKET_SF_PAIRS   = [[0,1]];
-
-function reorder(m,o){return o.map(i=>m[i]).filter(Boolean)}
-
-const VENUE_SHORT_MAP={
-  'Estadio BBVA':         'Estadio BBVA, Monterrey',
-  'Estadio Azteca':       'Estadio Azteca, Mexico City',
-  'NRG Stadium':          'NRG Stadium, Houston',
-  'MetLife Stadium':      'MetLife Stadium, New York/New Jersey',
-  'SoFi Stadium':         'SoFi Stadium, Los Angeles',
-  'BC Place':             'BC Place, Vancouver',
-  'Lumen Field':          'Lumen Field, Seattle',
-  'Mercedes-Benz Stadium':'Mercedes-Benz Stadium, Atlanta',
-  'BMO Field':            'BMO Field, Toronto',
-  'Gillette Stadium':     'Gillette Stadium, Boston',
-  'AT&T Stadium':         'AT&T Stadium, Dallas',
-  'Arrowhead Stadium':    'Arrowhead Stadium, Kansas City',
-  'Hard Rock Stadium':    'Hard Rock Stadium, Miami',
-  "Levi's Stadium":       "Levi's Stadium, San Francisco Bay Area",
-  'Lincoln Financial Field':'Lincoln Financial Field, Philadelphia',
-};
-
-const CARD_H=74,GAP=8,LABEL_H=26,CONN_W=28;
-function colH(n){return LABEL_H+n*(CARD_H+GAP)}
-function cardMid(k){return LABEL_H+k*(CARD_H+GAP)+CARD_H/2}
-function rightCardTop(ia,ib){return(cardMid(ia)+cardMid(ib))/2-CARD_H/2}
-
-function makeBktCard(m){
-  const cls=m.isFinal?'bkt-card final-card':m.isThird?'bkt-card third-card':'bkt-card';
-  const el=document.createElement('div');
-  el.className=cls;
-  const mk=t=>t.tbd?`<div class="bkt-tbd">${t.name}</div>`:`<img class="bkt-flag" src="https://flagcdn.com/32x24/${t.code}.png" alt="" onerror="this.style.display='none'"><div class="bkt-name">${t.name}</div>`;
-  el.innerHTML=`<div class="bkt-card-hdr"><span class="bkt-mid">${m.id||''}</span><span class="bkt-time">${m.date.split(' ')[0]} ${m.time}</span></div><div class="bkt-team">${mk(m.home)}</div><div class="bkt-team">${mk(m.away)}</div><div class="bkt-venue">📍 ${m.venue}</div>`;
-  return el;
-}
-
-function buildBktCol(matches,label,labelCls,topFn){
-  const col=document.createElement('div');
-  col.className='bkt-col';
-  col.style.height=colH(matches.length)+'px';
-  const lbl=document.createElement('div');
-  lbl.className='bkt-col-label'+(labelCls?' '+labelCls:'');
-  lbl.textContent=label;
-  col.appendChild(lbl);
-  const cards=[];
-  matches.forEach((m,k)=>{
-    const card=makeBktCard(m);
-    card.style.cssText=`position:absolute;top:${topFn(k)}px;left:0;width:130px`;
-    col.appendChild(card);
-    cards.push(card);
-  });
-  return{col,cards};
-}
-
-function buildConn(pairs,leftTopFn,rightTopFn,h){
-  const W=CONN_W,svgNS='http://www.w3.org/2000/svg';
-  const div=document.createElement('div');
-  div.className='bkt-conn';
-  div.style.cssText=`width:${W}px;flex-shrink:0;position:relative;height:${h}px`;
-  const svg=document.createElementNS(svgNS,'svg');
-  svg.setAttribute('width',W);svg.setAttribute('height',h);
-  svg.style.cssText='position:absolute;top:0;left:0;overflow:visible';
-  pairs.forEach(([ia,ib],k)=>{
-    const ya=leftTopFn(ia)+CARD_H/2,yb=leftTopFn(ib)+CARD_H/2,yMid=(ya+yb)/2,yr=rightTopFn(k)+CARD_H/2;
-    const p=document.createElementNS(svgNS,'path');
-    p.setAttribute('d',`M0,${ya} H${W/2} V${yMid} M0,${yb} H${W/2} V${yMid} M${W/2},${yMid} V${yr} H${W}`);
-    p.setAttribute('fill','none');p.setAttribute('stroke','#94a3b8');p.setAttribute('stroke-width','1.5');p.setAttribute('stroke-linejoin','round');
-    svg.appendChild(p);
-  });
-  div.appendChild(svg);return div;
-}
-
-function renderKO(){
-  const el=document.getElementById('koContent');
-  if(el.dataset.built) return;
-  el.dataset.built='1';
-  const r32m=KO_ROUNDS[0].matches,r16m=KO_ROUNDS[1].matches,qfm=KO_ROUNDS[2].matches,sfm=KO_ROUNDS[3].matches,thirdm=KO_ROUNDS[4].matches,finm=KO_ROUNDS[5].matches;
-  const r32=reorder(r32m,BRACKET_R32_ORDER);
-  const r16=reorder(r16m,BRACKET_R16_ORDER);
-  const qf=reorder(qfm,BRACKET_QF_ORDER);
-  const sf=reorder(sfm,BRACKET_SF_ORDER);
-  const r32Top=k=>LABEL_H+k*(CARD_H+GAP);
-  const r32p=BRACKET_R32_PAIRS;
-  const r16Top=k=>rightCardTop(r32p[k][0],r32p[k][1]);
-  const r16p=BRACKET_R16_PAIRS;
-  const qfTop=k=>{const[ia,ib]=r16p[k];return(r16Top(ia)+r16Top(ib))/2+CARD_H/2-CARD_H/2};
-  const qfp=BRACKET_QF_PAIRS;
-  const sfTop=k=>{const[ia,ib]=qfp[k];return(qfTop(ia)+qfTop(ib))/2+CARD_H/2-CARD_H/2};
-  const finTop=k=>LABEL_H;
-  const h=colH(16);
-  const{col:c0,cards:cards0}=buildBktCol(r32,'Round of 32','',r32Top);
-  const{col:c1,cards:cards1}=buildBktCol(r16,'Round of 16','next',r16Top);
-  const{col:c2,cards:cards2}=buildBktCol(qf,'Quarter-final','qf',qfTop);
-  const{col:c3,cards:cards3}=buildBktCol(sf,'Semi-final','sf',sfTop);
-  const{col:c4,cards:cards4}=buildBktCol(finm,'Final 🏆','final',finTop);
-  [c0,c1,c2,c3].forEach(c=>c.style.height=h+'px');
-  const finH=LABEL_H+CARD_H+48+LABEL_H+CARD_H+16;
-  c4.style.height=finH+'px';
-  const tpLbl=document.createElement('div');
-  tpLbl.className='bkt-col-label';
-  tpLbl.style.cssText=`position:absolute;top:${LABEL_H+CARD_H+40}px;left:0;background:#047857;width:130px`;
-  tpLbl.textContent='Third-place';
-  const tpCard=makeBktCard(thirdm[0]);
-  tpCard.style.cssText=`position:absolute;top:${LABEL_H+CARD_H+40+LABEL_H+4}px;left:0;width:130px`;
-  c4.appendChild(tpLbl);c4.appendChild(tpCard);
-  const conn0=buildConn(BRACKET_R32_PAIRS,r32Top,r16Top,h);
-  const conn1=buildConn(BRACKET_R16_PAIRS,r16Top,qfTop,h);
-  const conn2=buildConn(BRACKET_QF_PAIRS,qfTop,sfTop,h);
-  const conn3=buildConn(BRACKET_SF_PAIRS,sfTop,finTop,h);
-  const wrap=document.createElement('div');
-  wrap.style.cssText='display:flex;align-items:flex-start;gap:0;min-width:max-content;padding-bottom:20px';
-  [c0,conn0,c1,conn1,c2,conn2,c3,conn3,c4].forEach(n=>wrap.appendChild(n));
-  el.appendChild(wrap);
-}
-
-// Init
-renderGroup();
-renderMatches();
-
-const FLAG_CODE={
-  'Mexico':'mx','South Africa':'za','South Korea':'kr','Czechia':'cz',
-  'Canada':'ca','Bosnia & Herzegovina':'ba','Qatar':'qa','Switzerland':'ch',
-  'Brazil':'br','Morocco':'ma','Haiti':'ht','Scotland':'gb-sct',
-  'USA':'us','Paraguay':'py','Australia':'au','Turkey':'tr',
-  'Germany':'de','Curaçao':'cw','Ivory Coast':'ci','Ecuador':'ec',
-  'Netherlands':'nl','Japan':'jp','Sweden':'se','Tunisia':'tn',
-  'Belgium':'be','Egypt':'eg','Iran':'ir','New Zealand':'nz',
-  'Spain':'es','Cape Verde':'cv','Saudi Arabia':'sa','Uruguay':'uy',
-  'France':'fr','Senegal':'sn','Iraq':'iq','Norway':'no',
-  'Argentina':'ar','Algeria':'dz','Austria':'at','Jordan':'jo',
-  'Portugal':'pt','DR Congo':'cd','Uzbekistan':'uz','Colombia':'co',
-  'England':'gb-eng','Panama':'pa','Croatia':'hr','Ghana':'gh',
-};
-function flagUrl(team){
-  const code=FLAG_CODE[team]||team.toLowerCase().replace(/ /g,'-').replace(/[^a-z-]/g,'');
-  return 'https://flagcdn.com/32x24/'+code+'.png';
-}
-
-// ── Render group buttons ──────────────────────────────────────────────────────
-function renderGroupBtns(){
-  const bar=document.getElementById('groupBtns');
-  const groups=['ALL','A','B','C','D','E','F','G','H','I','J','K','L'];
-  bar.innerHTML='';
-  groups.forEach(g=>{
-    const b=document.createElement('button');
-    b.className='gbtn'+(g===currentGroup?' active':'');
-    b.textContent=g==='ALL'?'全部':'G'+g;
-    const t=g==='ALL'?{bdr:'#334155',bg:'#334155'}:GT[g];
-    b.style.borderColor=t.bdr;
-    b.style.color=g===currentGroup?'#fff':t.bdr;
-    if(g===currentGroup) b.style.background=t.bdr;
-    b.onclick=()=>{currentGroup=g;renderGroupBtns();renderMatches();};
-    bar.appendChild(b);
-  });
-}
-
-// ── Render matches ────────────────────────────────────────────────────────────
-function renderMatches(){
-  const list=document.getElementById('matchList');
-  const filtered=currentGroup==='ALL'?matches:matches.filter(m=>m.g===currentGroup);
-
-  const byDate={};
-  filtered.forEach(m=>{
-    const d=fmtDate(m.cest);
-    if(!byDate[d]) byDate[d]=[];
-    byDate[d].push(m);
-  });
-
-  const wrap=document.createDocumentFragment();
-
-  Object.keys(byDate).forEach(date=>{
-    const dh=document.createElement('div');
-    dh.className='date-hdr';
-    dh.textContent='📅 '+date;
-    wrap.appendChild(dh);
-
-    byDate[date].forEach((m,i)=>{
-      const t=GT[m.g];
-      const zh1=TEAM_ZH[m.t1]||m.t1;
-      const zh2=TEAM_ZH[m.t2]||m.t2;
-      const guide=getGuide(m.t1,m.t2);
-      const venue=VENUE_SHORT[m.venue]||m.venue;
-      const gid='g'+m.cest.replace(/\W/g,'')+i;
-      
-
-      const card=document.createElement('div');
-      card.className='match-card';
-      card.innerHTML=`
-        <div class="card-top">
-          <div class="group-pill" style="background:${t.bg};border:2px solid ${t.bdr}">
-            <span style="font-size:10px;color:${t.bdr};font-weight:900">${m.g}</span>
-          </div>
-          <div style="text-align:right">
-            <div class="match-time">${fmtTime(m.cest)}</div>
-            <div class="match-date">${fmtDate(m.cest)}</div>
-          </div>
-        </div>
-        <div class="teams">
-          <div class="team-row">
-            <img class="flag" src="${flagUrl(m.t1)}" alt="" onerror="this.style.display='none'">
-            <div class="team-info">
-              <div class="team-zh">${zh1}</div>
-              <div class="team-en">${m.t1}</div>
-            </div>
-          </div>
-          <div class="vs-divider">— VS —</div>
-          <div class="team-row">
-            <img class="flag" src="${flagUrl(m.t2)}" alt="" onerror="this.style.display='none'">
-            <div class="team-info">
-              <div class="team-zh">${zh2}</div>
-              <div class="team-en">${m.t2}</div>
-            </div>
-          </div>
-        </div>
-        <div class="venue-row">📍 ${venue}</div>
-        ${guide?`
-        <button class="guide-btn" onclick="toggleGuide('${gid}')">
-          🔥 觀戰重點 <span class="guide-arrow" id="arr-${gid}">▼</span>
-        </button>
-        <div class="guide-body" id="${gid}">
-          <div class="guide-title">${guide.title}</div>
-          <div class="guide-text">${guide.body}</div>
-          <div class="guide-key">
-            <div class="guide-key-lbl">⭐ 關鍵球員</div>
-            <div class="guide-key-text">${guide.key}</div>
-          </div>
-        </div>`:''}`;
-      wrap.appendChild(card);
-    });
-  });
-
-  list.innerHTML='';
-  list.appendChild(wrap);
-}
-
-function toggleGuide(id){
-  const el=document.getElementById(id);
-  const arr=document.getElementById('arr-'+id);
-  const open=el.classList.contains('open');
-  el.classList.toggle('open',!open);
-  arr.classList.toggle('open',!open);
-}
-
-// ── Tab switch ────────────────────────────────────────────────────────────────
-function switchTab(tab){
-  const isGroup=tab==='group';
-  document.getElementById('panelGroup').style.display=isGroup?'block':'none';
-  document.getElementById('panelKO').style.display=isGroup?'none':'block';
-  document.getElementById('tabGroup').classList.toggle('active',isGroup);
-  document.getElementById('tabKO').classList.toggle('active',!isGroup);
-  if(!isGroup && !document.getElementById('koRoundTabs').dataset.built) buildKOTabs();
-}
-
-// ── KO: round-tab design (no bracket, just clean cards per round) ─────────────
-const KO_ROUND_LABELS=[
-  '32強','16強','準決賽','四強','季軍賽','決賽 🏆'
-];
-let currentKORound=0;
+var KO_LABELS=['32強','16強','準決賽','四強','季軍賽','決賽 🏆'];
 
 function buildKOTabs(){
-  const tabs=document.getElementById('koRoundTabs');
+  var tabs=document.getElementById('koTabs');
   tabs.dataset.built='1';
-  KO_ROUNDS.forEach((r,i)=>{
-    const btn=document.createElement('button');
-    btn.className='ko-rtab'+(i===0?' active':'');
-    btn.textContent=KO_ROUND_LABELS[i]||r.shortLabel||('Round '+i);
-    btn.onclick=()=>{ currentKORound=i; renderKORound(i);
-      tabs.querySelectorAll('.ko-rtab').forEach((b,j)=>b.classList.toggle('active',j===i)); };
+  KO_ROUNDS.forEach(function(r,i){
+    var btn=document.createElement('button');
+    btn.className='ko-tab'+(i===0?' active':'');
+    btn.textContent=KO_LABELS[i];
+    btn.onclick=function(){
+      tabs.querySelectorAll('.ko-tab').forEach(function(b,j){b.classList.toggle('active',j===i);});
+      renderKORound(i);
+    };
     tabs.appendChild(btn);
   });
   renderKORound(0);
 }
 
 function renderKORound(idx){
-  const r=KO_ROUNDS[idx];
-  const list=document.getElementById('koList');
-  list.innerHTML='';
-
-  // Note
-  const note=document.createElement('div');
-  note.className='ko-note';
-  note.textContent='⚠️ 對手依小組賽結果確認後更新。所有時間為台灣時間（UTC+8）。';
-  list.appendChild(note);
-
-  r.matches.forEach(m=>{
-    const cls=m.isFinal?'ko-card final-card':m.isThird?'ko-card third-card':'ko-card';
-    const card=document.createElement('div');
-    card.className=cls;
-    const mkTeam=t=>t.tbd
-      ?`<div class="ko-tbd">${t.name}</div>`
-      :`<img class="ko-flag" src="https://flagcdn.com/32x24/${t.code}.png" alt="" onerror="this.style.display='none'">
-        <div class="ko-team-name">${t.name}</div>`;
-    card.innerHTML=`
-      <div class="ko-card-hdr">
-        <span class="ko-match-id">${m.id||''}</span>
-        <div style="text-align:right">
-          <div class="ko-match-time">${m.time}</div>
-          <div class="ko-match-date">${m.date}</div>
-        </div>
-      </div>
-      <div class="ko-teams">
-        <div class="ko-team-row">${mkTeam(m.home)}</div>
-        <div class="vs-divider" style="padding:4px 0;font-size:11px;color:#cbd5e1;font-weight:700;letter-spacing:.1em">— VS —</div>
-        <div class="ko-team-row">${mkTeam(m.away)}</div>
-      </div>
-      <div class="ko-venue">📍 ${m.venue}</div>`;
-    list.appendChild(card);
+  var r=KO_ROUNDS[idx];
+  var list=document.getElementById('koList');
+  var html='<div class="ko-note">⚠️ 對手依小組賽結果確認後更新。所有時間為台灣時間（UTC+8）。</div>';
+  r.matches.forEach(function(m){
+    var cls=m.isFinal?'ko-card final-card':m.isThird?'ko-card third-card':'ko-card';
+    var mkTeam=function(t){
+      return t.tbd
+        ?'<div class="ko-tbd">'+t.name+'</div>'
+        :'<img class="ko-flag" src="https://flagcdn.com/48x36/'+t.code+'.png" alt="">'+t.name+'</div>';
+    };
+    html+='<div class="'+cls+'">'
+      +'<div class="ko-hdr"><span class="ko-mid">'+(m.id||'')+'</span>'
+      +'<div style="text-align:right"><div class="ko-time">'+m.time+'</div>'
+      +'<div class="ko-date">'+m.date+'</div></div></div>'
+      +'<div class="ko-teams">'
+      +'<div class="ko-team-row">'+mkTeam(m.home)+'</div>'
+      +'<div class="vs-line" style="padding:4px 0;font-size:11px;color:#cbd5e1;font-weight:700;letter-spacing:.1em">— VS —</div>'
+      +'<div class="ko-team-row">'+mkTeam(m.away)+'</div>'
+      +'</div>'
+      +'<div class="ko-venue">📍 '+m.venue+'</div>'
+      +'</div>';
   });
+  list.innerHTML=html;
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
+// Init
 renderGroupBtns();
 renderMatches();
 </script>
