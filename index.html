@@ -7,145 +7,133 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#F0F4FF;color:#0f172a;min-height:100vh;height:auto;
+  background:#F2F5FB;color:#0f172a;min-height:100vh;height:auto;
   overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;font-size:16px}
 
-.hdr{background:linear-gradient(135deg,#1e3a8a,#1d4ed8);padding:14px 16px 12px;
-  position:sticky;top:0;z-index:200}
-.hdr-title{font-size:17px;font-weight:900;color:#fff}
+.hdr{background:#1e3a8a;padding:14px 16px 12px;position:sticky;top:0;z-index:200}
+.hdr-title{font-size:17px;font-weight:900;color:#fff;letter-spacing:-.2px}
 .hdr-sub{font-size:11px;color:#93c5fd;margin-top:3px}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-bottom:2px solid #e2e8f0}
-.stat{text-align:center;padding:10px 4px;border-top:3px solid}
-.stat:nth-child(1){border-color:#3B82F6;background:#EFF6FF}
-.stat:nth-child(2){border-color:#10B981;background:#ECFDF5}
-.stat:nth-child(3){border-color:#F59E0B;background:#FFFBEB}
-.stat:nth-child(4){border-color:#EC4899;background:#FDF2F8}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);background:#fff}
+.stat{text-align:center;padding:10px 4px;position:relative}
+.stat::after{content:'';position:absolute;bottom:0;left:10%;width:80%;height:3px;border-radius:3px 3px 0 0}
+.stat:nth-child(1)::after{background:#2563eb}
+.stat:nth-child(2)::after{background:#059669}
+.stat:nth-child(3)::after{background:#d97706}
+.stat:nth-child(4)::after{background:#db2777}
 .stat-val{font-size:20px;font-weight:900;color:#0f172a;line-height:1}
-.stat-lbl{font-size:10px;color:#475569;font-weight:600;margin-top:2px}
+.stat-lbl{font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px}
 
-.main-tabs{display:flex;background:#fff;border-bottom:3px solid #e2e8f0;position:sticky;top:68px;z-index:199}
+.main-tabs{display:flex;background:#fff;border-bottom:1px solid #e8edf5;position:sticky;top:68px;z-index:199}
 .main-tab{flex:1;padding:13px 0;font-size:15px;font-weight:700;border:none;
-  background:none;cursor:pointer;color:#64748b;font-family:inherit;
-  border-bottom:4px solid transparent;margin-bottom:-3px}
-.main-tab.active{color:#1e40af;border-bottom-color:#1e40af;background:#f0f6ff}
+  background:none;cursor:pointer;color:#94a3b8;font-family:inherit;
+  border-bottom:3px solid transparent;margin-bottom:-1px}
+.main-tab.active{color:#1e40af;border-bottom-color:#2563eb;background:#f5f8ff}
 
 .group-bar{display:flex;overflow-x:auto;gap:8px;padding:10px 14px;
-  background:#fff;border-bottom:1px solid #e2e8f0;
+  background:#fff;border-bottom:1px solid #e8edf5;
   position:sticky;top:119px;z-index:198;scrollbar-width:none}
 .group-bar::-webkit-scrollbar{display:none}
 .gbtn{padding:7px 16px;border-radius:99px;font-size:14px;font-weight:800;
-  border:2.5px solid;cursor:pointer;background:#fff;font-family:inherit;white-space:nowrap;flex-shrink:0}
+  border:2px solid;cursor:pointer;background:#fff;font-family:inherit;white-space:nowrap;flex-shrink:0}
 .gbtn.active{color:#fff}
+.search-icon-btn{padding:7px 13px}
+
+.search-panel{display:none;padding:10px 14px;background:#fff;
+  border-bottom:2px solid #e8edf5;gap:8px;flex-direction:column}
+.search-panel.open{display:flex}
+.search-row{display:flex;gap:8px;align-items:center}
+.search-input{flex:1;padding:9px 14px;border:1.5px solid #e2e8f0;border-radius:99px;
+  font-size:14px;font-family:inherit;outline:none;background:#f8faff;color:#0f172a}
+.search-input:focus{border-color:#2563eb;background:#fff}
+.search-select{flex:1;padding:9px 14px;border:1.5px solid #e2e8f0;border-radius:99px;
+  font-size:14px;font-family:inherit;outline:none;background:#f8faff;color:#0f172a;
+  appearance:none;-webkit-appearance:none;padding-right:32px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center}
+.search-clear{padding:9px 14px;border-radius:99px;border:1.5px solid #e2e8f0;
+  background:#fff;font-size:13px;font-weight:700;color:#64748b;
+  cursor:pointer;font-family:inherit;white-space:nowrap}
+.match-count{font-size:11px;color:#94a3b8;font-weight:600;text-align:right}
 
 .date-hdr{padding:12px 16px 8px;font-size:12px;font-weight:800;color:#64748b;
-  text-transform:uppercase;letter-spacing:.08em;background:#F0F4FF;
-  border-bottom:1px solid #dde4f0}
+  text-transform:uppercase;letter-spacing:.08em;background:#F2F5FB;
+  border-bottom:1px solid #dce3f0}
 
 .match-card{background:#fff;margin:8px 12px;border-radius:16px;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);overflow:hidden}
+  border:1px solid #e8edf5;overflow:hidden}
 .card-top{display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px 8px;border-bottom:1px solid #f1f5f9}
-.group-pill{display:inline-flex;align-items:center;padding:5px 12px;
-  border-radius:99px;font-size:13px;font-weight:900;border:2.5px solid}
-.match-time{font-size:24px;font-weight:900;color:#1e40af;line-height:1}
-.match-date{font-size:11px;color:#94a3b8;text-align:right;margin-top:2px}
+  padding:10px 14px 9px;background:#f8faff;border-bottom:1px solid #eef2fb}
+.group-pill{display:flex;align-items:center;gap:6px}
+.pill-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.pill-txt{font-size:13px;font-weight:900}
+.match-time{font-size:24px;font-weight:900;color:#1e3a8a;line-height:1}
+.match-date{font-size:11px;color:#94a3b8;text-align:right;margin-top:2px;font-weight:600}
 
 .teams{padding:12px 14px}
 .team-row{display:flex;align-items:center;gap:10px;padding:6px 0}
-.team-row+.team-row{border-top:1px solid #f1f5f9;margin-top:2px;padding-top:8px}
-.flag{width:36px;height:24px;object-fit:cover;border-radius:4px;
-  border:1px solid rgba(0,0,0,.1);flex-shrink:0}
-.team-zh{font-size:19px;font-weight:800;color:#0f172a}
-.team-en{font-size:11px;color:#94a3b8;margin-left:2px}
+.team-row+.team-row{border-top:1px solid #f1f5f9;padding-top:7px;margin-top:1px}
+.flag{width:28px;height:19px;object-fit:cover;border-radius:4px;
+  border:1px solid #e2e8f0;flex-shrink:0}
+.team-zh{font-size:18px;font-weight:900;color:#0f172a}
+.team-en{font-size:10px;color:#94a3b8;margin-left:2px}
 .vs-line{text-align:center;font-size:11px;color:#cbd5e1;
   font-weight:700;letter-spacing:.1em;padding:1px 0}
 
-.venue-row{display:flex;align-items:center;gap:5px;padding:8px 14px;
-  background:#f8faff;border-top:1px solid #f1f5f9;font-size:12px;color:#475569;font-weight:500}
+.venue-row{display:flex;align-items:center;gap:5px;padding:7px 14px;
+  background:#f8faff;border-top:1px solid #eef2fb;font-size:12px;color:#64748b;font-weight:500}
 
-.guide-btn{width:100%;text-align:left;padding:12px 14px;background:#EFF6FF;
-  border:none;border-top:1px solid #BFDBFE;cursor:pointer;
+.guide-btn{width:100%;text-align:left;padding:11px 14px;background:#f0f6ff;
+  border:none;border-top:1px solid #dbeafe;cursor:pointer;
   font-size:14px;color:#1e40af;font-weight:700;font-family:inherit;
   display:flex;align-items:center;justify-content:space-between}
+.guide-arrow{width:22px;height:22px;border-radius:50%;background:#dbeafe;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:#1e40af;flex-shrink:0;transition:transform .2s}
+.guide-arrow.open{transform:rotate(180deg)}
 .guide-body{display:none;padding:14px;background:#f0f6ff;border-top:1px solid #dbeafe}
 .guide-body.open{display:block}
 .guide-title{font-size:14px;font-weight:800;color:#1e3a8a;margin-bottom:8px;line-height:1.5}
 .guide-text{font-size:13px;color:#334155;line-height:1.8}
-.guide-key{margin-top:10px;padding:10px 12px;background:#fff;border-radius:10px;border-left:4px solid #f59e0b}
-.guide-key-lbl{font-size:10px;font-weight:800;text-transform:uppercase;color:#b45309;letter-spacing:.06em;margin-bottom:4px}
+.guide-key{margin-top:10px;padding:10px 12px;background:#fff;
+  border-radius:10px;border-left:4px solid #f59e0b;border-radius:0;
+  border-radius:0 8px 8px 0}
+.guide-key-lbl{font-size:10px;font-weight:800;text-transform:uppercase;
+  color:#b45309;letter-spacing:.06em;margin-bottom:4px}
 .guide-key-text{font-size:13px;color:#1e293b;line-height:1.7}
 
-
-/* ── Search bar ── */
-.search-toggle{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:9px 14px;background:#fff;border-bottom:1px solid #e2e8f0;
-  cursor:pointer;position:sticky;top:167px;z-index:197;
-}
-.search-toggle-label{font-size:13px;font-weight:700;color:#475569;
-  display:flex;align-items:center;gap:6px}
-.search-toggle-arrow{font-size:11px;color:#94a3b8;transition:transform .2s}
-.search-toggle-arrow.open{transform:rotate(180deg)}
-.search-panel{
-  display:none;padding:10px 14px;background:#fff;
-  border-bottom:2px solid #e2e8f0;gap:8px;flex-direction:column;
-}
-.search-panel.open{display:flex}
-.search-row{display:flex;gap:8px;align-items:center}
-.search-input{
-  flex:1;padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:99px;
-  font-size:14px;font-family:inherit;outline:none;background:#f8faff;
-  color:#0f172a;
-}
-.search-input:focus{border-color:#3b82f6;background:#fff}
-.search-select{
-  flex:1;padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:99px;
-  font-size:14px;font-family:inherit;outline:none;background:#f8faff;
-  color:#0f172a;appearance:none;-webkit-appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 12px center;
-  padding-right:32px;
-}
-.search-clear{
-  padding:9px 14px;border-radius:99px;border:1.5px solid #e2e8f0;
-  background:#fff;font-size:13px;font-weight:700;color:#64748b;
-  cursor:pointer;font-family:inherit;white-space:nowrap;
-}
-.match-count{font-size:11px;color:#94a3b8;font-weight:600;text-align:right}
-
-.ko-tabs{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid #e2e8f0;
+.ko-tabs{display:flex;overflow-x:auto;background:#fff;border-bottom:1px solid #e8edf5;
   position:sticky;top:119px;z-index:198;scrollbar-width:none}
 .ko-tabs::-webkit-scrollbar{display:none}
 .ko-tab{padding:12px 18px;font-size:14px;font-weight:700;border:none;background:none;
-  cursor:pointer;color:#64748b;font-family:inherit;white-space:nowrap;
+  cursor:pointer;color:#94a3b8;font-family:inherit;white-space:nowrap;
   border-bottom:3px solid transparent;flex-shrink:0}
-.ko-tab.active{color:#1e40af;border-bottom-color:#1e40af;background:#f0f6ff}
+.ko-tab.active{color:#1e40af;border-bottom-color:#2563eb;background:#f5f8ff}
 
 .ko-list{padding:10px 12px;display:flex;flex-direction:column;gap:10px}
-.ko-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.ko-card.final-card{box-shadow:0 4px 16px rgba(245,158,11,.25);border:2px solid #F59E0B}
+.ko-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #e8edf5}
+.ko-card.final-card{border:2px solid #F59E0B}
 .ko-card.third-card{border:2px solid #10B981}
 .ko-hdr{display:flex;align-items:center;justify-content:space-between;
   padding:10px 14px;background:#1e3a8a}
 .ko-card.final-card .ko-hdr{background:#92400E}
 .ko-card.third-card .ko-hdr{background:#065F46}
-.ko-mid{font-size:12px;font-weight:800;color:#93c5fd}
-.ko-card.final-card .ko-mid,.ko-card.third-card .ko-mid{color:#a7f3d0}
+.ko-mid{font-size:15px;font-weight:900;color:#fff;letter-spacing:.02em}
 .ko-time{font-size:22px;font-weight:900;color:#fff;line-height:1}
 .ko-date{font-size:12px;color:#bfdbfe;font-weight:600;margin-top:2px}
 .ko-card.final-card .ko-date,.ko-card.third-card .ko-date{color:#fde68a}
 .ko-teams{padding:12px 14px}
 .ko-team-row{display:flex;align-items:center;gap:10px;padding:6px 0}
-.ko-team-row+.ko-team-row{border-top:1px solid #f1f5f9;margin-top:2px;padding-top:8px}
-.ko-flag{width:34px;height:23px;object-fit:cover;border-radius:4px;
-  border:1px solid rgba(0,0,0,.1);flex-shrink:0}
-.ko-name{font-size:18px;font-weight:800;color:#0f172a}
-.ko-tbd{font-size:16px;color:#475569;font-style:italic;font-weight:600}
-.ko-venue{display:flex;align-items:center;gap:5px;padding:8px 14px;
-  background:#f8faff;border-top:1px solid #f1f5f9;font-size:12px;color:#475569;font-weight:600}
+.ko-team-row+.ko-team-row{border-top:1px solid #f1f5f9;padding-top:7px;margin-top:1px}
+.ko-flag{width:28px;height:19px;object-fit:cover;border-radius:4px;
+  border:1px solid #e2e8f0;flex-shrink:0}
+.ko-name{font-size:18px;font-weight:900;color:#0f172a}
+.ko-tbd{font-size:15px;color:#475569;font-style:italic;font-weight:600}
+.ko-venue{display:flex;align-items:center;gap:5px;padding:7px 14px;
+  background:#f8faff;border-top:1px solid #eef2fb;font-size:12px;color:#64748b;font-weight:600}
 .ko-note{margin:0 0 8px;padding:10px 14px;background:#fff;border-radius:12px;
-  font-size:12px;color:#475569;line-height:1.7;border-left:4px solid #64748b;font-weight:500}
+  font-size:12px;color:#475569;line-height:1.7;
+  border-left:4px solid #64748b;border-radius:0 8px 8px 0;font-weight:500}
 </style>
 </head>
 <body>
@@ -154,10 +142,10 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   <div class="hdr-sub">台灣時間（UTC+8）· 小組賽 6/11–6/28 · 淘汰賽 6/29–7/19</div>
 </div>
 <div class="stats">
-  <div class="stat"><div class="stat-val">72</div><div class="stat-lbl">🏆 小組</div></div>
-  <div class="stat"><div class="stat-val">48</div><div class="stat-lbl">🌍 隊伍</div></div>
-  <div class="stat"><div class="stat-val">12</div><div class="stat-lbl">📋 分組</div></div>
-  <div class="stat"><div class="stat-val">16</div><div class="stat-lbl">🏟️ 場館</div></div>
+  <div class="stat"><div class="stat-val">72</div><div class="stat-lbl">小組賽</div></div>
+  <div class="stat"><div class="stat-val">48</div><div class="stat-lbl">隊伍</div></div>
+  <div class="stat"><div class="stat-val">12</div><div class="stat-lbl">分組</div></div>
+  <div class="stat"><div class="stat-val">16</div><div class="stat-lbl">場館</div></div>
 </div>
 <div class="main-tabs">
   <button class="main-tab active" id="tabGroup" onclick="switchTab('group')">📋 小組賽</button>
@@ -165,10 +153,6 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 </div>
 <div id="panelGroup">
   <div class="group-bar" id="groupBtns"></div>
-  <button class="search-toggle" id="searchToggle" onclick="toggleSearch()">
-    <span class="search-toggle-label">🔍 搜尋球隊 / 篩選日期</span>
-    <span class="search-toggle-arrow" id="searchArrow">▼</span>
-  </button>
   <div class="search-panel" id="searchPanel">
     <div class="search-row">
       <input class="search-input" id="teamSearch" type="text" placeholder="🔍 搜尋球隊（中文或英文）" oninput="renderMatches()">
@@ -718,6 +702,21 @@ function renderGroupBtns(){
   var bar=document.getElementById('groupBtns');
   var groups=['ALL','A','B','C','D','E','F','G','H','I','J','K','L'];
   bar.innerHTML='';
+  // Search icon button (leftmost)
+  var sb=document.createElement('button');
+  sb.className='gbtn search-icon-btn'+(searchOpen?' active':'');
+  sb.innerHTML='🔍';
+  sb.title='搜尋 / 篩選';
+  sb.style.borderColor='#64748b';
+  sb.style.color=searchOpen?'#fff':'#64748b';
+  if(searchOpen) sb.style.background='#64748b';
+  sb.style.padding='7px 12px';
+  sb.onclick=function(){toggleSearch();};
+  bar.appendChild(sb);
+  // Divider
+  var div=document.createElement('div');
+  div.style.cssText='width:1px;background:#e2e8f0;margin:4px 0;flex-shrink:0';
+  bar.appendChild(div);
   groups.forEach(function(g){
     var b=document.createElement('button');
     b.className='gbtn'+(g===currentGroup?' active':'');
@@ -741,13 +740,16 @@ function populateDateFilter(){
   });
 }
 
+var searchOpen=false;
 function toggleSearch(){
+  searchOpen=!searchOpen;
   var panel=document.getElementById('searchPanel');
-  var arrow=document.getElementById('searchArrow');
-  var open=panel.classList.contains('open');
-  panel.classList.toggle('open',!open);
-  arrow.classList.toggle('open',!open);
-  if(!open) populateDateFilter();
+  panel.classList.toggle('open',searchOpen);
+  if(searchOpen) populateDateFilter();
+  renderGroupBtns(); // re-render to update icon btn style
+  if(searchOpen) setTimeout(function(){
+    document.getElementById('teamSearch').focus();
+  },100);
 }
 
 function clearSearch(){
@@ -797,7 +799,7 @@ function renderMatches(){
       var gid='g'+i+m.cest.replace(/[^0-9]/g,'');
       html+='<div class="match-card">'
         +'<div class="card-top">'
-        +'<div class="group-pill" style="background:'+t.bg+';border-color:'+t.bdr+';color:'+t.bdr+'">'+m.g+'</div>'
+        +'<div class="group-pill"><div class="pill-dot" style="background:'+t.bdr+'"></div><div class="pill-txt" style="color:'+t.bdr+'">GROUP '+m.g+'</div></div>'
         +'<div style="text-align:right"><div class="match-time">'+fmtTime(m.cest)+'</div>'
         +'<div class="match-date">'+fmtDate(m.cest)+'</div></div>'
         +'</div>'
@@ -811,7 +813,7 @@ function renderMatches(){
         +'<div class="venue-row">📍 '+venue+'</div>';
       if(guide){
         html+='<button class="guide-btn" onclick="toggleGuide(\''+gid+'\')">'
-          +'🔥 觀戰重點 <span id="arr-'+gid+'">▼</span></button>'
+          +'🔥 觀戰重點<div class="guide-arrow" id="arr-'+gid+'">▼</div></button>'
           +'<div class="guide-body" id="'+gid+'">'
           +'<div class="guide-title">'+guide.title+'</div>'
           +'<div class="guide-text">'+guide.body+'</div>'
@@ -830,7 +832,7 @@ function toggleGuide(id){
   var el=document.getElementById(id),arr=document.getElementById('arr-'+id);
   var open=el.classList.contains('open');
   el.classList.toggle('open',!open);
-  arr.textContent=open?'▼':'▲';
+  arr.classList.toggle('open',!open);
 }
 
 function switchTab(tab){
@@ -852,20 +854,20 @@ const KO_ROUNDS=[
   {label:'32強 Round of 32',shortLabel:'Round of 32',cols:2,matches:[
     {id:'M73',date:'6/28 週日',time:'04:00',home:tbd('A2'),away:tbd('B2'),venue:'SoFi Stadium'},
     {id:'M75',date:'6/29 週一',time:'10:00',home:tbd('F1'),away:tbd('C2'),venue:'Estadio BBVA'},
-    {id:'M74',date:'6/29 週一',time:'05:30',home:tbd('E1'),away:tbd('最佳第3 C'),venue:'Gillette Stadium'},
-    {id:'M77',date:'6/30 週二',time:'06:00',home:tbd('I1'),away:tbd('最佳第3 G'),venue:'MetLife Stadium'},
+    {id:'M74',date:'6/29 週一',time:'05:30',home:tbd('E1'),away:tbd('最佳第3（ABCDF）'),venue:'Gillette Stadium'},
+    {id:'M77',date:'6/30 週二',time:'06:00',home:tbd('I1'),away:tbd('最佳第3（CDFGH）'),venue:'MetLife Stadium'},
     {id:'M76',date:'6/29 週一',time:'02:00',home:tbd('C1'),away:tbd('F2'),venue:'NRG Stadium'},
     {id:'M78',date:'6/30 週二',time:'02:00',home:tbd('E2'),away:tbd('I2'),venue:'AT&T Stadium'},
-    {id:'M79',date:'6/30 週二',time:'10:00',home:tbd('A1'),away:tbd('最佳第3 H'),venue:'Estadio Azteca'},
-    {id:'M80',date:'7/01 週三',time:'01:00',home:tbd('L1'),away:tbd('最佳第3 E'),venue:'Mercedes-Benz Stadium'},
+    {id:'M79',date:'6/30 週二',time:'10:00',home:tbd('A1'),away:tbd('最佳第3（CEFHI）'),venue:'Estadio Azteca'},
+    {id:'M80',date:'7/01 週三',time:'01:00',home:tbd('L1'),away:tbd('最佳第3（EHIJK）'),venue:'Mercedes-Benz Stadium'},
     {id:'M83',date:'7/02 週四',time:'08:00',home:tbd('K2'),away:tbd('L2'),venue:'BMO Field'},
     {id:'M84',date:'7/02 週四',time:'04:00',home:tbd('H1'),away:tbd('J2'),venue:'SoFi Stadium'},
-    {id:'M81',date:'7/01 週三',time:'09:00',home:tbd('D1'),away:tbd('最佳第3 B'),venue:"Levi's Stadium"},
-    {id:'M82',date:'7/01 週三',time:'05:00',home:tbd('G1'),away:tbd('最佳第3 A'),venue:'Lumen Field'},
+    {id:'M81',date:'7/01 週三',time:'09:00',home:tbd('D1'),away:tbd('最佳第3（BEIJ）'),venue:"Levi's Stadium"},
+    {id:'M82',date:'7/01 週三',time:'05:00',home:tbd('G1'),away:tbd('最佳第3（AEHIJ）'),venue:'Lumen Field'},
     {id:'M86',date:'7/03 週五',time:'07:00',home:tbd('J1'),away:tbd('H2'),venue:'Hard Rock Stadium'},
     {id:'M88',date:'7/03 週五',time:'03:00',home:tbd('D2'),away:tbd('G2'),venue:'AT&T Stadium'},
-    {id:'M85',date:'7/03 週五',time:'00:00',home:tbd('B1'),away:tbd('最佳第3 F'),venue:'BC Place'},
-    {id:'M87',date:'7/03 週五',time:'10:30',home:tbd('K1'),away:tbd('最佳第3 D'),venue:'Arrowhead Stadium'},
+    {id:'M85',date:'7/03 週五',time:'00:00',home:tbd('B1'),away:tbd('最佳第3（DEIJL）'),venue:'BC Place'},
+    {id:'M87',date:'7/03 週五',time:'10:30',home:tbd('K1'),away:tbd('最佳第3（DEIJL）'),venue:'Arrowhead Stadium'},
   ]},
   // R16: display order matches R32 bracket pairs (M90,M89,M91,M92,M93,M94,M95,M96)
   // QF pairs: (M90,M89)→M97, (M91,M92)→M99, (M93,M94)→M98, (M95,M96)→M100
